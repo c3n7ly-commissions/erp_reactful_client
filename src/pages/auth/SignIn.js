@@ -97,7 +97,8 @@ function SignInScreen() {
   const closeSnackBar = (event, reason) => {
     setSnackBarState({
       open: false,
-      type: "info"
+      type: "info",
+      value: ""
     });
   };
 
@@ -118,10 +119,14 @@ function SignInScreen() {
       "This field should not be left empty" : "";
     setFormValidations(validations);
 
-    console.log("setting");
+    if (validations["email"] !== "" || validations["password"] !== "") {
+      return;
+    }
+
     setSnackBarState({
       open: true,
-      type: "success"
+      type: "info",
+      value: "Signing In"
     });
   };
 
@@ -218,7 +223,7 @@ function SignInScreen() {
           onClose={closeSnackBar}
           autoHideDuration={6000}
         >
-          <Alert severity={snackBarState["type"]}>Logged in successfully</Alert>
+          <Alert severity={snackBarState["type"]}>{snackBarState["value"]}</Alert>
         </Snackbar>
 
       </Grid>
