@@ -18,13 +18,13 @@ export const sendLogin = (data) => {
     return axios.post('https://laravel-erp-server.herokuapp.com/api/auth/login', data, {
       xsrfHeaderName: "X-XSRF-TOKEN", // change the name of the header to "X-XSRF-TOKEN" and it should works
       withCredentials: true
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    });
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   })
   return response;
 }
@@ -71,12 +71,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignInScreen() {
-  // const params = new URLSearchParams();
-  // params.append('email', 'johndoe@gmail.com');
-  // params.append('password', 'rastaman');
-
-  // sendLogin(params);
-
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState({
@@ -97,7 +91,7 @@ function SignInScreen() {
   const closeSnackBar = (event, reason) => {
     setSnackBarState({
       open: false,
-      type: "info",
+      type: snackBarState["type"],
       value: ""
     });
   };
@@ -128,6 +122,52 @@ function SignInScreen() {
       type: "info",
       value: "Signing In"
     });
+
+    const params = new URLSearchParams();
+    params.append('email', formValues["email"]);
+    params.append('password', formValues["password"]);
+
+    sendLogin(params)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          if (error.response.status === 401) {
+            setSnackBarState({
+              open: true,
+              type: "error",
+              value: error.response.data.message
+            });
+          }
+          else if (error.response.status === 423) {
+            setSnackBarState({
+              open: true,
+              type: "warning",
+              value: error.response.data.message
+            });
+          } else {
+            setSnackBarState({
+              open: true,
+              type: "error",
+              value: `error code ${error.response.status}`
+            });
+          }
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      });
   };
 
   return (
