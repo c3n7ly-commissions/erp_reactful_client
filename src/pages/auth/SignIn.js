@@ -95,6 +95,16 @@ function SignInScreen() {
     }
   }
 
+  const signInClicked = () => {
+    let { ...validations } = formValidations;
+
+    validations["email"] = formValues['email'] === "" ?
+      "This field should not be left empty" : "";
+    validations["password"] = formValues['password'] === "" ?
+      "This field should not be left empty" : "";
+    setFormValidations(validations);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -140,7 +150,7 @@ function SignInScreen() {
                     value={formValues["email"]}
                     onChange={fieldChangedClosure("email")}
                     className={classes.textField}
-                    error={formValidations["email"] != ""}
+                    error={formValidations["email"] !== ""}
                     helperText={formValidations["email"]}
                   />
                 </Grid>
@@ -154,7 +164,7 @@ function SignInScreen() {
                     value={formValues["password"]}
                     onChange={fieldChangedClosure("password")}
                     className={classes.textField}
-                    error={formValidations["password"] != ""}
+                    error={formValidations["password"] !== ""}
                     helperText={formValidations["password"]}
                   />
                 </Grid>
@@ -164,6 +174,7 @@ function SignInScreen() {
                     variant="contained"
                     color="primary"
                     className={classes.signInButton}
+                    onClick={signInClicked}
                   >
                     Sign In
                   </Button>
