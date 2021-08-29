@@ -77,20 +77,18 @@ function SignInScreen() {
 
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    email: "johndoe@gmail.com",
+  const [formValues, setFormValues] = useState({
+    email: "",
     password: ""
   });
 
-  const emailChanged = event => {
-    setValues(event.target.value);
-  };
-
-  // const fieldChangedClosure = fieldName => {
-  //   return function fieldChanged(event) {
-
-  //   }
-  // }
+  const fieldChangedClosure = fieldName => {
+    return function fieldChanged(event) {
+      let tmpVals = formValues;
+      tmpVals[fieldName] = event.target.value;
+      setFormValues({ ...tmpVals });
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -134,8 +132,8 @@ function SignInScreen() {
                     required
                     label="Email Address"
                     variant="outlined"
-                    value={values["email"]}
-                    onChange={emailChanged}
+                    value={formValues["email"]}
+                    onChange={fieldChangedClosure("email")}
                     className={classes.textField}
                   />
                 </Grid>
@@ -146,6 +144,8 @@ function SignInScreen() {
                     label="Password"
                     type="password"
                     variant="outlined"
+                    value={formValues["password"]}
+                    onChange={fieldChangedClosure("password")}
                     className={classes.textField}
                   />
                 </Grid>
