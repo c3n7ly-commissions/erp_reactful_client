@@ -2,8 +2,10 @@ import {
   Button, Grid, Card, CardContent, TextField, makeStyles,
   Typography,
   createTheme,
-  ThemeProvider
+  ThemeProvider,
+  Snackbar,
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
 import axios from 'axios';
 import { useState } from 'react';
@@ -87,6 +89,22 @@ function SignInScreen() {
     password: ""
   });
 
+  const [snackBarState, setSnackBarState] = useState({
+    open: false,
+    type: "success"
+  });
+
+  const closeSnackBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackBarState({
+      open: false,
+      type: "default"
+    });
+  };
+
   const fieldChangedClosure = fieldName => {
     return function fieldChanged(event) {
       let tmpVals = formValues;
@@ -103,6 +121,12 @@ function SignInScreen() {
     validations["password"] = formValues['password'] === "" ?
       "This field should not be left empty" : "";
     setFormValidations(validations);
+
+    console.log("setting");
+    setSnackBarState({
+      open: true,
+      type: "success"
+    });
   };
 
   return (
@@ -191,6 +215,13 @@ function SignInScreen() {
             </CardContent>
           </Card>
         </Grid>
+
+
+        <Snackbar
+          open={snackBarState["open"]}
+          onClose={closeSnackBar}>
+          <Alert severity={snackBarState["type"]}>Logged in successfully</Alert>
+        </Snackbar>
 
       </Grid>
     </ThemeProvider>
