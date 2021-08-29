@@ -9,6 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
 import axios from 'axios';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // Make a request for a user with a given ID
 export const sendLogin = (data) => {
@@ -88,6 +89,8 @@ function SignInScreen() {
     type: "success"
   });
 
+  const history = useHistory();
+
   const closeSnackBar = (event, reason) => {
     setSnackBarState({
       open: false,
@@ -129,6 +132,8 @@ function SignInScreen() {
 
     sendLogin(params)
       .then(function (response) {
+        // if we are here the response is 2xx
+        history.push("/dashboard_screen_1");
         console.log(response);
       })
       .catch(function (error) {
