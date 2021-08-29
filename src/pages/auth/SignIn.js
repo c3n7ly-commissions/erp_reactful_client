@@ -82,6 +82,11 @@ function SignInScreen() {
     password: ""
   });
 
+  const [formValidations, setFormValidations] = useState({
+    email: "",
+    password: ""
+  });
+
   const fieldChangedClosure = fieldName => {
     return function fieldChanged(event) {
       let tmpVals = formValues;
@@ -135,6 +140,8 @@ function SignInScreen() {
                     value={formValues["email"]}
                     onChange={fieldChangedClosure("email")}
                     className={classes.textField}
+                    error={formValidations["email"] != ""}
+                    helperText={formValidations["email"]}
                   />
                 </Grid>
 
@@ -147,6 +154,8 @@ function SignInScreen() {
                     value={formValues["password"]}
                     onChange={fieldChangedClosure("password")}
                     className={classes.textField}
+                    error={formValidations["password"] != ""}
+                    helperText={formValidations["password"]}
                   />
                 </Grid>
 
