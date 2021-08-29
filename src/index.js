@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+  // For snackbars to work
+  // https://stackoverflow.com/a/67981050/7450617
   <React.Fragment>
     <App />
   </React.Fragment>,
