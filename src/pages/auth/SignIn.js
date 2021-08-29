@@ -95,13 +95,9 @@ function SignInScreen() {
   });
 
   const closeSnackBar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
     setSnackBarState({
       open: false,
-      type: "default"
+      type: "info"
     });
   };
 
@@ -219,7 +215,9 @@ function SignInScreen() {
 
         <Snackbar
           open={snackBarState["open"]}
-          onClose={closeSnackBar}>
+          onClose={closeSnackBar}
+          autoHideDuration={6000}
+        >
           <Alert severity={snackBarState["type"]}>Logged in successfully</Alert>
         </Snackbar>
 
