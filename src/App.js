@@ -6,12 +6,12 @@ const axios = require('axios');
 
 export const sendLogin = (data) => {
   axios.defaults.withCredentials = true;
-  const response = axios.get('http://localhost:8100/sanctum/csrf-cookie',
+  const response = axios.get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie',
     // {
     //   withCredentials: false
     // }
   ).then(response => {
-    return axios.post('http://localhost:8100/api/auth/login', data, {
+    return axios.post('https://laravel-erp-server.herokuapp.com/api/auth/login', data, {
       xsrfHeaderName: "X-XSRF-TOKEN", // change the name of the header to "X-XSRF-TOKEN" and it should works
       withCredentials: true
     })
