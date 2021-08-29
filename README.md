@@ -1,7 +1,7 @@
 # ERP Reactful Client
 ![org](https://img.shields.io/badge/org-c3n7-9cf)
 ![license](https://img.shields.io/badge/license-%09AGPL--3.0--or--later-blue)
-![[netlify](https://c3n7-erp-reactful-client.netlify.app)](https://img.shields.io/badge/sample-Netlify-5BAAD0)  
+[![](https://img.shields.io/badge/sample-Netlify-5BAAD0)](https://c3n7-erp-reactful-client.netlify.app)  
 - Developed using `React.js` and `Material UI`
 - A sample of the app has been deployed on [netlify](https://c3n7-erp-reactful-client.netlify.app)
 
