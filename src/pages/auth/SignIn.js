@@ -1,5 +1,10 @@
 import {
-  Button, Grid, Card, CardContent, TextField, makeStyles,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  TextField,
+  makeStyles,
   Typography,
   createTheme,
   ThemeProvider,
@@ -14,21 +19,26 @@ import { useHistory } from 'react-router-dom';
 // Make a request for a user with a given ID
 export const sendLogin = (data) => {
   axios.defaults.withCredentials = true;
-  const response = axios.get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie'
-  ).then(response => {
-    return axios.post('https://laravel-erp-server.herokuapp.com/api/auth/login', data, {
-      xsrfHeaderName: "X-XSRF-TOKEN", // change the name of the header to "X-XSRF-TOKEN" and it should works
-      withCredentials: true
+  const response = axios
+    .get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie')
+    .then((_response) => {
+      return axios.post(
+        'https://laravel-erp-server.herokuapp.com/api/auth/login',
+        data,
+        {
+          xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN" and it should works
+          withCredentials: true,
+        }
+      );
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
     });
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
-  })
   return response;
-}
+};
 
 const theme = createTheme({
   typography: {
@@ -48,45 +58,45 @@ const theme = createTheme({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((_theme) => ({
   textField: {
-    minWidth: "100%"
+    minWidth: '100%',
   },
   header: {
-    textAlign: "center",
-    fontSize: "2.7rem",
-    fontWeight: 200
+    textAlign: 'center',
+    fontSize: '2.7rem',
+    fontWeight: 200,
   },
   headerHelper: {
-    textAlign: "center",
+    textAlign: 'center',
     color: grey[700],
-    fontSize: "0.9rem"
+    fontSize: '0.9rem',
   },
   signInButton: {
-    minWidth: "100%",
-    padding: "0.5rem"
+    minWidth: '100%',
+    padding: '0.5rem',
   },
   forgotButton: {
-    minWidth: "100%",
-  }
+    minWidth: '100%',
+  },
 }));
 
 function SignInScreen() {
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   });
 
   const [formValidations, setFormValidations] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   });
 
   const [snackBarState, setSnackBarState] = useState({
     open: false,
-    type: "success"
+    type: 'success',
   });
 
   const history = useHistory();
@@ -94,46 +104,48 @@ function SignInScreen() {
   const closeSnackBar = (event, reason) => {
     setSnackBarState({
       open: false,
-      type: snackBarState["type"],
-      value: ""
+      type: snackBarState['type'],
+      value: '',
     });
   };
 
-  const fieldChangedClosure = fieldName => {
+  const fieldChangedClosure = (fieldName) => {
     return function fieldChanged(event) {
       let tmpVals = formValues;
       tmpVals[fieldName] = event.target.value;
       setFormValues({ ...tmpVals });
-    }
-  }
+    };
+  };
 
   const signInClicked = () => {
     let { ...validations } = formValidations;
 
-    validations["email"] = formValues['email'] === "" ?
-      "This field should not be left empty" : "";
-    validations["password"] = formValues['password'] === "" ?
-      "This field should not be left empty" : "";
+    validations['email'] =
+      formValues['email'] === '' ? 'This field should not be left empty' : '';
+    validations['password'] =
+      formValues['password'] === ''
+        ? 'This field should not be left empty'
+        : '';
     setFormValidations(validations);
 
-    if (validations["email"] !== "" || validations["password"] !== "") {
+    if (validations['email'] !== '' || validations['password'] !== '') {
       return;
     }
 
     setSnackBarState({
       open: true,
-      type: "info",
-      value: "Signing In"
+      type: 'info',
+      value: 'Signing In',
     });
 
     const params = new URLSearchParams();
-    params.append('email', formValues["email"]);
-    params.append('password', formValues["password"]);
+    params.append('email', formValues['email']);
+    params.append('password', formValues['password']);
 
     sendLogin(params)
       .then(function (response) {
         // if we are here the response is 2xx
-        history.push("/dashboard_screen_1");
+        history.push('/dashboard_screen_1');
         console.log(response);
       })
       .catch(function (error) {
@@ -146,21 +158,20 @@ function SignInScreen() {
           if (error.response.status === 401) {
             setSnackBarState({
               open: true,
-              type: "error",
-              value: error.response.data.message
+              type: 'error',
+              value: error.response.data.message,
             });
-          }
-          else if (error.response.status === 423) {
+          } else if (error.response.status === 423) {
             setSnackBarState({
               open: true,
-              type: "warning",
-              value: error.response.data.message
+              type: 'warning',
+              value: error.response.data.message,
             });
           } else {
             setSnackBarState({
               open: true,
-              type: "error",
-              value: `error code ${error.response.status}`
+              type: 'error',
+              value: `error code ${error.response.status}`,
             });
           }
         } else if (error.request) {
@@ -185,18 +196,13 @@ function SignInScreen() {
         justifyContent="center"
         style={{ minHeight: '100vh' }}
       >
-
         <Grid item xs={3}>
           <Card>
             <CardContent>
-
               <Grid container spacing={2}>
-
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
-                    <Typography variant="h2"
-                      className={classes.header}
-                    >
+                    <Typography variant="h2" className={classes.header}>
                       Sign In
                     </Typography>
                   </Grid>
@@ -217,11 +223,11 @@ function SignInScreen() {
                     required
                     label="Email Address"
                     variant="outlined"
-                    value={formValues["email"]}
-                    onChange={fieldChangedClosure("email")}
+                    value={formValues['email']}
+                    onChange={fieldChangedClosure('email')}
                     className={classes.textField}
-                    error={formValidations["email"] !== ""}
-                    helperText={formValidations["email"]}
+                    error={formValidations['email'] !== ''}
+                    helperText={formValidations['email']}
                   />
                 </Grid>
 
@@ -231,11 +237,11 @@ function SignInScreen() {
                     label="Password"
                     type="password"
                     variant="outlined"
-                    value={formValues["password"]}
-                    onChange={fieldChangedClosure("password")}
+                    value={formValues['password']}
+                    onChange={fieldChangedClosure('password')}
                     className={classes.textField}
-                    error={formValidations["password"] !== ""}
-                    helperText={formValidations["password"]}
+                    error={formValidations['password'] !== ''}
+                    helperText={formValidations['password']}
                   />
                 </Grid>
 
@@ -249,28 +255,24 @@ function SignInScreen() {
                     Sign In
                   </Button>
 
-                  <Button
-                    color="primary"
-                    className={classes.forgotButton}
-                  >
+                  <Button color="primary" className={classes.forgotButton}>
                     Forgot Password
                   </Button>
                 </Grid>
-
               </Grid>
             </CardContent>
           </Card>
         </Grid>
 
-
         <Snackbar
-          open={snackBarState["open"]}
+          open={snackBarState['open']}
           onClose={closeSnackBar}
           autoHideDuration={6000}
         >
-          <Alert severity={snackBarState["type"]}>{snackBarState["value"]}</Alert>
+          <Alert severity={snackBarState['type']}>
+            {snackBarState['value']}
+          </Alert>
         </Snackbar>
-
       </Grid>
     </ThemeProvider>
   );
