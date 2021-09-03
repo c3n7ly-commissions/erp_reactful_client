@@ -21,9 +21,9 @@ const getAuthDetails = () => {
 export function DashboardScreen1() {
   useEffect(() => {
     console.log('updated component');
-    getAuthDetails().then((response) => {
-      console.log(response);
-    });
+    // getAuthDetails().then((response) => {
+    // console.log(response);
+    // });
   });
 
   return (
@@ -32,4 +32,3 @@ export function DashboardScreen1() {
     </div>
   );
 }
-
