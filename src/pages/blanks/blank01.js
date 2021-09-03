@@ -1,32 +1,12 @@
 import React from 'react';
-import {
-  AppBar,
-  CssBaseline,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { CssBaseline, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import NavigationDrawer from '../../components/drawer';
-
-const drawerWidth = 240;
+import NavBar from '../../components/navbar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
   },
   // needed for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -47,22 +27,7 @@ function BlankScreen01() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <NavBar handleDrawerToggle={handleDrawerToggle} />
       <NavigationDrawer
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
