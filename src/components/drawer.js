@@ -8,8 +8,9 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  ThemeProvider,
   makeStyles,
-  useTheme,
+  createTheme,
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import MailIcon from '@material-ui/icons/Mail';
@@ -36,10 +37,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#f00',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+    background: {
+      paper: '#fff',
+    },
+    drawerBackground: {
+      paper: '#ff0',
+    },
+  },
+});
+
 function NavigationDrawer(props) {
   const { window } = props;
   const classes = useStyles();
-  const theme = useTheme();
 
   const drawer = (
     <div>
@@ -79,34 +96,36 @@ function NavigationDrawer(props) {
   return (
     <nav className={classes.drawer} aria-label="drawer nav">
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden smUp implementation="css">
-        <Drawer
-          container={container}
-          variant="temporary"
-          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-          open={props.mobileOpen}
-          onClose={props.handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
-        <Drawer
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          variant="permanent"
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Hidden>
+      <ThemeProvider theme={theme}>
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={props.mobileOpen}
+            onClose={props.handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </ThemeProvider>
     </nav>
   );
 }
