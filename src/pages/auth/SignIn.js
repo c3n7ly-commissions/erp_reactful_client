@@ -12,33 +12,9 @@ import {
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
-import axios from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
-// Make a request for a user with a given ID
-export const sendLogin = (data) => {
-  axios.defaults.withCredentials = true;
-  const response = axios
-    .get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie')
-    .then((_response) => {
-      return axios.post(
-        'https://laravel-erp-server.herokuapp.com/api/auth/login',
-        data,
-        {
-          xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN" and it should works
-          withCredentials: true,
-        }
-      );
-      // .then(function (response) {
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
-    });
-  return response;
-};
+import auth from '../../utils/auth/auth.js';
 
 const theme = createTheme({
   typography: {
@@ -145,7 +121,8 @@ function SignInScreen() {
     params.append('email', formValues['email']);
     params.append('password', formValues['password']);
 
-    sendLogin(params)
+    auth
+      .sendLogin(params)
       .then(function (response) {
         // if we are here the response is 2xx
         history.push('/dashboard_screen_1');
