@@ -35,7 +35,7 @@ function NavigationDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes} />
+      <div className={classes.toolbar} />
       <Divider />
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
