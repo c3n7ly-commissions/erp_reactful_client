@@ -164,7 +164,7 @@ function SignInScreen() {
       }
     };
 
-    auth.sendLogin(params, signedIn, errorSigningIn);
+    auth.login(params, signedIn, errorSigningIn);
   };
 
   return (

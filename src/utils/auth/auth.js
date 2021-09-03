@@ -6,7 +6,7 @@ class Auth {
   }
 
   // Make a request for a user with a given ID
-  sendLogin = (data, successCallback, errorCallback) => {
+  login = (data, successCallback, errorCallback) => {
     axios.defaults.withCredentials = true;
     const response = axios
       .get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie')
