@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import BasePage01 from '../base/base01';
 // import axios from 'axios';
 
 // const getAuthDetails = () => {
@@ -28,7 +29,7 @@ export function DashboardScreen1() {
 
   return (
     <div>
-      <h1>Dashboard Screen 1</h1>
+      <BasePage01>Dashboard</BasePage01>
     </div>
   );
 }
