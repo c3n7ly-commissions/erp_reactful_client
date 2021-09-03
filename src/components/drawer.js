@@ -35,9 +35,30 @@ const useStyles = makeStyles((theme) => ({
       flexShrink: 0,
     },
   },
+  navIcon: {
+    color: '#fff',
+  },
+  listText: {
+    fontSize: '0.9rem',
+  },
 }));
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
   palette: {
     primary: {
       main: '#f00',
@@ -46,17 +67,17 @@ const theme = createTheme({
       main: '#11cb5f',
     },
     background: {
-      paper: '#fff',
+      paper: '#233044',
     },
-    drawerBackground: {
-      paper: '#ff0',
+    text: {
+      primary: '#fff',
     },
   },
 });
 
 function NavigationDrawer(props) {
   const { window } = props;
-  const classes = useStyles();
+  const classes = useStyles(theme);
 
   const drawer = (
     <div>
@@ -69,10 +90,13 @@ function NavigationDrawer(props) {
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
+            <ListItemIcon className={classes.navIcon}>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={text}
+              classes={{ primary: classes.listText }}
+            />
           </ListItem>
         ))}
       </List>
@@ -80,10 +104,13 @@ function NavigationDrawer(props) {
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
+            <ListItemIcon className={classes.navIcon}>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={text}
+              classes={{ primary: classes.listText }}
+            />
           </ListItem>
         ))}
       </List>

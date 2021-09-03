@@ -6,6 +6,8 @@ import {
   makeStyles,
   Badge,
   Box,
+  ThemeProvider,
+  createTheme,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MailIcon from '@material-ui/icons/Mail';
@@ -29,38 +31,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#fff',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+    background: {
+      paper: '#fff',
+    },
+    text: {
+      primary: '#000',
+    },
+  },
+});
+
 function NavBar(props) {
   const classes = useStyles();
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar>
-        <Box display="flex" flexGrow={1}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={props.handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Box>
-        <div>
-          <IconButton color="inherit" aria-label="show notifications">
-            <Badge badgeContent={3} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton color="inherit" aria-label="my account">
-            <AccountCircle />
-          </IconButton>
-          <IconButton color="inherit" aria-label="log out">
-            <PowerSettingsNewIcon />
-          </IconButton>
-        </div>
-      </Toolbar>
-    </AppBar>
+    <ThemeProvider theme={theme}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Box display="flex" flexGrow={1}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={props.handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <div>
+            <IconButton color="inherit" aria-label="show notifications">
+              <Badge badgeContent={3} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" aria-label="my account">
+              <AccountCircle />
+            </IconButton>
+            <IconButton color="inherit" aria-label="log out">
+              <PowerSettingsNewIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </ThemeProvider>
   );
 }
 
