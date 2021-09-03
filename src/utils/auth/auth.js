@@ -6,25 +6,26 @@ class Auth {
   }
 
   // Make a request for a user with a given ID
-  sendLogin = (data) => {
+  sendLogin = (data, successCallback, errorCallback) => {
     axios.defaults.withCredentials = true;
     const response = axios
       .get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie')
       .then((_response) => {
-        return axios.post(
-          'https://laravel-erp-server.herokuapp.com/api/auth/login',
-          data,
-          {
-            xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
-            withCredentials: true,
-          }
-        );
-        // .then(function (response) {
-        //   console.log(response);
-        // })
-        // .catch(function (error) {
-        //   console.log(error);
-        // });
+        axios
+          .post(
+            'https://laravel-erp-server.herokuapp.com/api/auth/login',
+            data,
+            {
+              xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
+              withCredentials: true,
+            }
+          )
+          .then(function (response) {
+            successCallback(response);
+          })
+          .catch(function (error) {
+            errorCallback(error);
+          });
       });
     return response;
   };

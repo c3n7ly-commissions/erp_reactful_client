@@ -121,49 +121,50 @@ function SignInScreen() {
     params.append('email', formValues['email']);
     params.append('password', formValues['password']);
 
-    auth
-      .sendLogin(params)
-      .then(function (response) {
-        // if we are here the response is 2xx
-        history.push('/dashboard_screen_1');
-        console.log(response);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-          if (error.response.status === 401) {
-            setSnackBarState({
-              open: true,
-              type: 'error',
-              value: error.response.data.message,
-            });
-          } else if (error.response.status === 423) {
-            setSnackBarState({
-              open: true,
-              type: 'warning',
-              value: error.response.data.message,
-            });
-          } else {
-            setSnackBarState({
-              open: true,
-              type: 'error',
-              value: `error code ${error.response.status}`,
-            });
-          }
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
+    const signedIn = (response) => {
+      // if we are here the response is 2xx
+      history.push('/dashboard_screen_1');
+      console.log(response);
+    };
+
+    const errorSigningIn = (error) => {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        if (error.response.status === 401) {
+          setSnackBarState({
+            open: true,
+            type: 'error',
+            value: error.response.data.message,
+          });
+        } else if (error.response.status === 423) {
+          setSnackBarState({
+            open: true,
+            type: 'warning',
+            value: error.response.data.message,
+          });
         } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
+          setSnackBarState({
+            open: true,
+            type: 'error',
+            value: `error code ${error.response.status}`,
+          });
         }
-      });
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+    };
+
+    auth.sendLogin(params, signedIn, errorSigningIn);
   };
 
   return (
