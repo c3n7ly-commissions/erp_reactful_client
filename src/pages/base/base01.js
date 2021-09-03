@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Card, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import NavigationDrawer from '../../components/drawer';
 import NavBar from '../../components/navbar';
@@ -34,7 +34,9 @@ function BasePage01(props) {
       />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        <Card>
+          <CardContent>{props.children}</CardContent>
+        </Card>
       </main>
     </div>
   );
