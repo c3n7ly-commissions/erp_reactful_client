@@ -79,6 +79,9 @@ const useStyles = makeStyles((_theme) => ({
   forgotButton: {
     minWidth: '100%',
   },
+  fullWidth: {
+    minWidth: '100%',
+  },
 }));
 
 function SignInScreen() {
@@ -219,45 +222,56 @@ function SignInScreen() {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    label="Email Address"
-                    variant="outlined"
-                    value={formValues['email']}
-                    onChange={fieldChangedClosure('email')}
-                    className={classes.textField}
-                    error={formValidations['email'] !== ''}
-                    helperText={formValidations['email']}
-                  />
-                </Grid>
+                  <form className={classes.fullWidth}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          label="Email Address"
+                          autoComplete="username"
+                          variant="outlined"
+                          value={formValues['email']}
+                          onChange={fieldChangedClosure('email')}
+                          className={classes.textField}
+                          error={formValidations['email'] !== ''}
+                          helperText={formValidations['email']}
+                        />
+                      </Grid>
 
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    value={formValues['password']}
-                    onChange={fieldChangedClosure('password')}
-                    className={classes.textField}
-                    error={formValidations['password'] !== ''}
-                    helperText={formValidations['password']}
-                  />
-                </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          label="Password"
+                          type="password"
+                          autoComplete="current-password"
+                          variant="outlined"
+                          value={formValues['password']}
+                          onChange={fieldChangedClosure('password')}
+                          className={classes.textField}
+                          error={formValidations['password'] !== ''}
+                          helperText={formValidations['password']}
+                        />
+                      </Grid>
 
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.signInButton}
-                    onClick={signInClicked}
-                  >
-                    Sign In
-                  </Button>
+                      <Grid item xs={12}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.signInButton}
+                          onClick={signInClicked}
+                        >
+                          Sign In
+                        </Button>
 
-                  <Button color="primary" className={classes.forgotButton}>
-                    Forgot Password
-                  </Button>
+                        <Button
+                          color="primary"
+                          className={classes.forgotButton}
+                        >
+                          Forgot Password
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </form>
                 </Grid>
               </Grid>
             </CardContent>
