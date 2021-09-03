@@ -41,7 +41,7 @@ function NavBar(props) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          ERP
+          ...
         </Typography>
       </Toolbar>
     </AppBar>
