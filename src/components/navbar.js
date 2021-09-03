@@ -3,10 +3,14 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
   makeStyles,
+  Badge,
+  Box,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import MailIcon from '@material-ui/icons/Mail';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
 
@@ -31,18 +35,30 @@ function NavBar(props) {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={props.handleDrawerToggle}
-          className={classes.menuButton}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          ...
-        </Typography>
+        <Box display="flex" flexGrow={1}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={props.handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Box>
+        <div>
+          <IconButton color="inherit" aria-label="show notifications">
+            <Badge badgeContent={3} color="secondary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <IconButton color="inherit" aria-label="my account">
+            <AccountCircle />
+          </IconButton>
+          <IconButton color="inherit" aria-label="log out">
+            <PowerSettingsNewIcon />
+          </IconButton>
+        </div>
       </Toolbar>
     </AppBar>
   );
