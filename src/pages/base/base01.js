@@ -28,7 +28,10 @@ const theme = createTheme({
       main: '#f00',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#ff0',
+    },
+    warning: {
+      main: '#f00',
     },
     background: {
       paper: '#fff',

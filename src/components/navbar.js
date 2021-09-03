@@ -10,8 +10,8 @@ import {
   createTheme,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import MailIcon from '@material-ui/icons/Mail';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  iconButton: {
+    color: '#9E9E9E',
+  },
 }));
 
 const theme = createTheme({
@@ -37,7 +40,10 @@ const theme = createTheme({
       main: '#fff',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#4782DA',
+    },
+    warning: {
+      main: '#f00',
     },
     background: {
       paper: '#fff',
@@ -53,7 +59,12 @@ function NavBar(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        color="primary"
+        elevation={0}
+      >
         <Toolbar>
           <Box display="flex" flexGrow={1}>
             <IconButton
@@ -67,15 +78,27 @@ function NavBar(props) {
             </IconButton>
           </Box>
           <div>
-            <IconButton color="inherit" aria-label="show notifications">
+            <IconButton
+              color="inherit"
+              aria-label="show notifications"
+              className={classes.iconButton}
+            >
               <Badge badgeContent={3} color="secondary">
-                <MailIcon />
+                <MailOutlineIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit" aria-label="my account">
-              <AccountCircle />
+            <IconButton
+              color="inherit"
+              aria-label="my account"
+              className={classes.iconButton}
+            >
+              <AccountCircleOutlinedIcon />
             </IconButton>
-            <IconButton color="inherit" aria-label="log out">
+            <IconButton
+              color="inherit"
+              aria-label="log out"
+              className={classes.iconButton}
+            >
               <PowerSettingsNewIcon />
             </IconButton>
           </div>
