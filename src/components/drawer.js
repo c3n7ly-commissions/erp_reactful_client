@@ -150,7 +150,7 @@ function NavigationDrawer(props) {
           <List component="div" disablePadding>
             <ListItemLink
               itemText="Divisions"
-              clickHandler={handleNavLinkClick('/blank01')}
+              clickHandler={handleNavLinkClick('/divisions')}
             />
             <ListItemLink
               itemText="Branches"
