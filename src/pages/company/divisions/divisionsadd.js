@@ -1,28 +1,55 @@
 import React from 'react';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import {
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  Button,
+  makeStyles,
+} from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 import BasePage01 from '../../base/base01';
+const useStyles = makeStyles((theme) => ({
+  cardHeader: {
+    fontWeight: 300,
+    marginBottom: theme.spacing(1.5),
+  },
+  textField: {
+    minWidth: '100%',
+  },
+}));
 
 function DivisionsAdd() {
+  const classes = useStyles();
   return (
     <BasePage01 crumb={['Company', 'Divisions', 'Add']} title="Add Division">
       <Card>
         <CardContent>
-          <Typography paragraph>Content goes here</Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
+          <Typography variant="subtitle2" className={classes.cardHeader}>
+            Add Division
           </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                label="Division Name"
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                startIcon={<SaveIcon />}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </BasePage01>
