@@ -128,7 +128,7 @@ function NavigationDrawer(props) {
             <DashboardOutlinedIcon />
           </ListItemIcon>
           <ListItemText
-            primary="Dashboard"
+            primary="Dashboards"
             classes={{ primary: classes.listText }}
           />
           {navItemOpen['dashboard'] ? (
@@ -141,7 +141,7 @@ function NavigationDrawer(props) {
           <List component="div" disablePadding>
             <ListItem button className={classes.listItemNested}>
               <ListItemText
-                primary="Analytics"
+                primary="Sales"
                 classes={{ primary: classes.listText }}
               />
             </ListItem>

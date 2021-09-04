@@ -29,7 +29,7 @@ export function DashboardScreen1() {
 
   return (
     <div>
-      <BasePage01 title="Analytics Dashboard" crumb={['Dashboards', 'Sales']}>
+      <BasePage01 title="Sales Dashboard" crumb={['Dashboards', 'Sales']}>
         Dashboard
       </BasePage01>
     </div>
