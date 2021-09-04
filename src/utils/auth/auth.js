@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 class Auth {
-  constructor() {
-    window.sessionStorage.setItem('token', '');
-  }
-
   checkIfAuthenticated(successCallback, errorCallback) {
     axios.defaults.withCredentials = true;
+    const config = {
+      xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
+      withCredentials: true,
+      headers: {
+        Authorization: 'Bearer ' + window.sessionStorage.getItem('token'),
+      },
+    };
     const response = axios.get('/sanctum/csrf-cookie').then((_response) => {
       axios
-        .get('/api/auth/show', {
-          xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
-          withCredentials: true,
-        })
+        .get('/api/auth/show', config)
         .then((response) => {
           successCallback(response);
         })

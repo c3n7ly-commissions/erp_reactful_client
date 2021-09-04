@@ -2,24 +2,6 @@ import { useEffect } from 'react';
 import { Card, CardContent } from '@material-ui/core';
 
 import BasePage01 from '../base/base01';
-// import axios from 'axios';
-
-// const getAuthDetails = () => {
-// axios.defaults.withCredentials = true;
-// const response = axios
-// .get('https://laravel-erp-server.herokuapp.com/sanctum/csrf-cookie')
-// .then((_response) => {
-// return axios.get(
-// 'https://laravel-erp-server.herokuapp.com/api/auth/show',
-// {
-// xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN" and it should works
-// withCredentials: true,
-// }
-// );
-// });
-
-// return response;
-// };
 
 export function DashboardScreen1() {
   useEffect(() => {

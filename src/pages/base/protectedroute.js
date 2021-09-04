@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route } from 'react-router';
 import auth from '../../utils/auth/auth';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // give benefit of doubt, assume the user is logged but check if authed first
+  // the gist is assume the token is correct until proven otherwise
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const successCallback = (response) => {
     console.log(response);
     setIsAuthenticated(true);
@@ -12,7 +14,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     console.log(error);
     setIsAuthenticated(false);
   };
-  auth.checkIfAuthenticated(successCallback, errorCallback);
+
+  useEffect(() => {
+    auth.checkIfAuthenticated(successCallback, errorCallback);
+  });
 
   return (
     <Route
