@@ -6,6 +6,7 @@ import ProtectedRoute from './pages/base/protectedroute';
 import SignInScreen from './pages/auth/SignIn';
 import BlankScreen01 from './pages/base/blank01';
 import DivisionsListing from './pages/company/divisions/divisionslisting';
+import DivisionsAdd from './pages/company/divisions/divisionsadd';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         />
         <ProtectedRoute exact path="/blank01" component={BlankScreen01} />
         <ProtectedRoute exact path="/divisions" component={DivisionsListing} />
+        <ProtectedRoute exact path="/divisions/add" component={DivisionsAdd} />
       </Switch>
     </Router>
   );
