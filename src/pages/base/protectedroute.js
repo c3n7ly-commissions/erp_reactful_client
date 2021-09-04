@@ -7,11 +7,11 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   // the gist is assume the token is correct until proven otherwise
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const successCallback = (response) => {
-    console.log(response);
+    console.log('protected route: ', response);
     setIsAuthenticated(true);
   };
   const errorCallback = (error) => {
-    console.log(error);
+    console.log('protected route: ', error);
     setIsAuthenticated(false);
   };
 
