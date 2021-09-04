@@ -177,7 +177,11 @@ function NavigationDrawer(props) {
         </ListItem>
         <Collapse in={navItemOpen['company']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem button className={classes.listItemNested}>
+            <ListItem
+              button
+              className={classes.listItemNested}
+              onClick={handleNavLinkClick('/blank01')}
+            >
               <ListItemText
                 primary="Divisions"
                 classes={{ primary: classes.listText }}
