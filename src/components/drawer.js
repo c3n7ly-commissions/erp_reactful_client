@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Hidden,
   Drawer,
@@ -14,6 +14,8 @@ import {
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import BusinessOutlinedIcon from '@material-ui/icons/BusinessOutlined';
 import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -50,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10px',
     marginBottom: '-12px',
   },
+  listExpandIcon: {
+    color: '#57616F',
+  },
 }));
 
 const theme = createTheme({
@@ -79,7 +84,7 @@ const theme = createTheme({
       paper: '#233044',
     },
     text: {
-      primary: '#fff',
+      primary: '#E4E4D4',
     },
   },
 });
@@ -87,6 +92,19 @@ const theme = createTheme({
 function NavigationDrawer(props) {
   const { window } = props;
   const classes = useStyles(theme);
+  const [navItemOpen, setNavItemOpen] = useState({
+    dashboard: false,
+    company: false,
+  });
+
+  const handleNavItemClick = (itemName) => {
+    return () => {
+      let { ...tmpNavItems } = navItemOpen;
+
+      tmpNavItems[itemName] = !tmpNavItems[itemName];
+      setNavItemOpen(tmpNavItems);
+    };
+  };
 
   const drawer = (
     <div>
@@ -100,7 +118,7 @@ function NavigationDrawer(props) {
           </ListSubheader>
         }
       >
-        <ListItem button>
+        <ListItem button onClick={handleNavItemClick('dashboard')}>
           <ListItemIcon className={classes.navIcon}>
             <DashboardOutlinedIcon />
           </ListItemIcon>
@@ -108,6 +126,11 @@ function NavigationDrawer(props) {
             primary="Dashboard"
             classes={{ primary: classes.listText }}
           />
+          {navItemOpen['dashboard'] ? (
+            <ExpandLess className={classes.listExpandIcon} />
+          ) : (
+            <ExpandMore className={classes.listExpandIcon} />
+          )}
         </ListItem>
 
         <ListItem button>
