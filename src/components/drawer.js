@@ -17,6 +17,7 @@ import BusinessOutlinedIcon from '@material-ui/icons/BusinessOutlined';
 import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { useHistory } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -97,6 +98,8 @@ const theme = createTheme({
 function NavigationDrawer(props) {
   const { window } = props;
   const classes = useStyles(theme);
+  const history = useHistory();
+
   const [navItemOpen, setNavItemOpen] = useState({
     dashboard: false,
     company: false,
@@ -108,6 +111,12 @@ function NavigationDrawer(props) {
 
       tmpNavItems[itemName] = !tmpNavItems[itemName];
       setNavItemOpen(tmpNavItems);
+    };
+  };
+
+  const handleNavLinkClick = (address) => {
+    return () => {
+      history.push(address);
     };
   };
 
@@ -139,7 +148,11 @@ function NavigationDrawer(props) {
         </ListItem>
         <Collapse in={navItemOpen['dashboard']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem button className={classes.listItemNested}>
+            <ListItem
+              button
+              className={classes.listItemNested}
+              onClick={handleNavLinkClick('/dashboard_screen_1')}
+            >
               <ListItemText
                 primary="Sales"
                 classes={{ primary: classes.listText }}
