@@ -18,6 +18,7 @@ import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router';
+import ListItemButton from './drawer/listitembutton';
 
 const drawerWidth = 240;
 
@@ -132,20 +133,12 @@ function NavigationDrawer(props) {
           </ListSubheader>
         }
       >
-        <ListItem button onClick={handleNavItemClick('dashboard')}>
-          <ListItemIcon className={classes.navIcon}>
-            <DashboardOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Dashboards"
-            classes={{ primary: classes.listText }}
-          />
-          {navItemOpen['dashboard'] ? (
-            <ExpandLess className={classes.listExpandIcon} />
-          ) : (
-            <ExpandMore className={classes.listExpandIcon} />
-          )}
-        </ListItem>
+        <ListItemButton
+          itemText="Dashboarding"
+          open={navItemOpen['dashboard']}
+          clickHandler={handleNavItemClick('dashboard')}
+          icon={<DashboardOutlinedIcon />}
+        />
         <Collapse in={navItemOpen['dashboard']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItem

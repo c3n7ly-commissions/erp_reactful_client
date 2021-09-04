@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SignInScreen from './pages/auth/SignIn';
 import BlankScreen01 from './pages/base/blank01';
