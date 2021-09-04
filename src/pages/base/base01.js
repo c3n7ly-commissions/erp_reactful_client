@@ -3,14 +3,14 @@ import {
   CssBaseline,
   Card,
   CardContent,
-  Breadcrumbs,
-  Typography,
+  Divider,
   ThemeProvider,
   createTheme,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import NavigationDrawer from '../../components/drawer';
 import NavBar from '../../components/navbar';
+import NavBreadcrumbs from '../../components/navcrumbs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  divider: {
+    marginBottom: theme.spacing(3),
   },
 }));
 
@@ -63,10 +66,9 @@ function BasePage01(props) {
         />
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <Breadcrumbs aria-label="breadcrumbs">
-            <Typography color="textPrimary">Dashboard</Typography>
-            <Typography color="textPrimary">Analytics</Typography>
-          </Breadcrumbs>
+          <NavBreadcrumbs />
+
+          <Divider className={classes.divider} />
 
           <main>
             <Card>
