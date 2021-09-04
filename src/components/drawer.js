@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Hidden,
   Drawer,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
@@ -12,9 +11,8 @@ import {
   makeStyles,
   createTheme,
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/Inbox';
-import MailIcon from '@material-ui/icons/Mail';
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
+import BusinessOutlinedIcon from '@material-ui/icons/BusinessOutlined';
 import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
 
 const drawerWidth = 240;
@@ -38,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navIcon: {
-    color: '#fff',
+    color: '#57616F',
+    marginLeft: '12px',
+    marginRight: '-15px',
   },
   listText: {
     fontSize: '0.9rem',
@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
   listHeader: {
     fontSize: '0.8rem',
     fontWeight: 600,
-    color: '#aaa',
+    color: '#ADB0B7',
+    marginLeft: '10px',
     marginBottom: '-12px',
-    marginTop: '0.3rem',
   },
 }));
 
@@ -109,20 +109,44 @@ function NavigationDrawer(props) {
             classes={{ primary: classes.listText }}
           />
         </ListItem>
+
+        <ListItem button>
+          <ListItemIcon className={classes.navIcon}>
+            <BusinessOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Company"
+            classes={{ primary: classes.listText }}
+          />
+        </ListItem>
       </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon className={classes.navIcon}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText
-              primary={text}
-              classes={{ primary: classes.listText }}
-            />
-          </ListItem>
-        ))}
+
+      <List
+        subheader={
+          <ListSubheader component="div" className={classes.listHeader}>
+            General
+          </ListSubheader>
+        }
+      >
+        <ListItem button>
+          <ListItemIcon className={classes.navIcon}>
+            <DashboardOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Dashboard"
+            classes={{ primary: classes.listText }}
+          />
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon className={classes.navIcon}>
+            <BusinessOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Company"
+            classes={{ primary: classes.listText }}
+          />
+        </ListItem>
       </List>
     </div>
   );
