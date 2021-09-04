@@ -114,7 +114,7 @@ function NavigationDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.drawerHeader}>
-        <img src={logo} alt="logo" height={40} />
+        <img src={logo} alt="logo" height={30} />
       </div>
       <List
         subheader={
