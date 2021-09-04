@@ -12,6 +12,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
@@ -25,6 +26,7 @@ function DivisionsListing() {
   const [rows, setRows] = useState([]);
   const [menuAnchors, setMenuAnchors] = useState({});
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleMenuClose = (id) => {
     return () => {
@@ -128,6 +130,9 @@ function DivisionsListing() {
           color="primary"
           size="small"
           startIcon={<AddIcon />}
+          onClick={() => {
+            history.push('divisions/add');
+          }}
         >
           Add Division
         </Button>
