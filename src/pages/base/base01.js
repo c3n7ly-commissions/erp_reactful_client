@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   CssBaseline,
-  Card,
-  CardContent,
   Divider,
   Typography,
   ThemeProvider,
@@ -95,11 +93,7 @@ function BasePage01(props) {
 
           <Divider className={classes.divider} />
 
-          <main>
-            <Card>
-              <CardContent>{props.children}</CardContent>
-            </Card>
-          </main>
+          <main>{props.children}</main>
         </div>
       </ThemeProvider>
     </div>
