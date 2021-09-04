@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
     marginLeft: '12px',
     marginRight: '-15px',
   },
-
   listExpandIcon: {
     color: '#57616F',
   },

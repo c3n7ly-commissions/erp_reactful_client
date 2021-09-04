@@ -15,8 +15,6 @@ import {
 import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import BusinessOutlinedIcon from '@material-ui/icons/BusinessOutlined';
 import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router';
 import ListItemButton from './drawer/listitembutton';
 import ListItemLink from './drawer/listitemlink';
@@ -55,14 +53,6 @@ const useStyles = makeStyles((theme) => ({
     color: '#ADB0B7',
     marginLeft: '10px',
     marginBottom: '-12px',
-  },
-  listExpandIcon: {
-    color: '#57616F',
-  },
-  listItemNested: {
-    paddingLeft: '78px',
-    // color: '#C4C4C4',
-    color: '#f00',
   },
 }));
 
@@ -136,7 +126,7 @@ function NavigationDrawer(props) {
         }
       >
         <ListItemButton
-          itemText="Dashboarding"
+          itemText="Dashboard"
           open={navItemOpen['dashboard']}
           clickHandler={handleNavItemClick('dashboard')}
           icon={<DashboardOutlinedIcon />}
@@ -144,44 +134,28 @@ function NavigationDrawer(props) {
         <Collapse in={navItemOpen['dashboard']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemLink
-              itemText="Salesing"
+              itemText="Sales"
               clickHandler={handleNavLinkClick('/dashboard_screen_1')}
             />
           </List>
         </Collapse>
 
-        <ListItem button onClick={handleNavItemClick('company')}>
-          <ListItemIcon className={classes.navIcon}>
-            <BusinessOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Company"
-            classes={{ primary: classes.listText }}
-          />
-          {navItemOpen['company'] ? (
-            <ExpandLess className={classes.listExpandIcon} />
-          ) : (
-            <ExpandMore className={classes.listExpandIcon} />
-          )}
-        </ListItem>
+        <ListItemButton
+          itemText="Company"
+          open={navItemOpen['company']}
+          clickHandler={handleNavItemClick('company')}
+          icon={<BusinessOutlinedIcon />}
+        />
         <Collapse in={navItemOpen['company']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem
-              button
-              className={classes.listItemNested}
-              onClick={handleNavLinkClick('/blank01')}
-            >
-              <ListItemText
-                primary="Divisions"
-                classes={{ primary: classes.listText }}
-              />
-            </ListItem>
-            <ListItem button className={classes.listItemNested}>
-              <ListItemText
-                primary="Branches"
-                classes={{ primary: classes.listText }}
-              />
-            </ListItem>
+            <ListItemLink
+              itemText="Divisions"
+              clickHandler={handleNavLinkClick('/blank01')}
+            />
+            <ListItemLink
+              itemText="Branches"
+              clickHandler={handleNavLinkClick('/blank01')}
+            />
           </List>
         </Collapse>
       </List>
