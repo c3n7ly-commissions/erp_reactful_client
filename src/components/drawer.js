@@ -7,12 +7,14 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
   ThemeProvider,
   makeStyles,
   createTheme,
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import MailIcon from '@material-ui/icons/Mail';
+import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
 import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
 
 const drawerWidth = 240;
@@ -40,6 +42,13 @@ const useStyles = makeStyles((theme) => ({
   },
   listText: {
     fontSize: '0.9rem',
+  },
+  listHeader: {
+    fontSize: '0.8rem',
+    fontWeight: 600,
+    color: '#aaa',
+    marginBottom: '-12px',
+    marginTop: '0.3rem',
   },
 }));
 
@@ -84,19 +93,22 @@ function NavigationDrawer(props) {
       <div className={classes.drawerHeader}>
         <img src={logo} alt="logo" height={40} />
       </div>
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon className={classes.navIcon}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText
-              primary={text}
-              classes={{ primary: classes.listText }}
-            />
-          </ListItem>
-        ))}
+      <List
+        subheader={
+          <ListSubheader component="div" className={classes.listHeader}>
+            General
+          </ListSubheader>
+        }
+      >
+        <ListItem button>
+          <ListItemIcon className={classes.navIcon}>
+            <DashboardOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Dashboard"
+            classes={{ primary: classes.listText }}
+          />
+        </ListItem>
       </List>
       <Divider />
       <List>
