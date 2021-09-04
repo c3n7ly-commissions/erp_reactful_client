@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   data-v-423bf9ae=""
+   viewBox="0 0 79.999999 80"
+   class="iconLeft"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="icon-monochrome-white.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+   width="80"
+   height="80"
+   inkscape:export-filename="/home/timo/Documents/Projects/work/freelance/erp_reactful_client/src/assets/images/c3n7_erp-logo/vector/icon-monochrome-white.png"
+   inkscape:export-xdpi="1228.8"
+   inkscape:export-ydpi="1228.8"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     showgrid="false"
+     inkscape:zoom="4.5433333"
+     inkscape:cx="61.408658"
+     inkscape:cy="59.427733"
+     inkscape:window-width="1916"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="20"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16"
+     width="61.83787px"
+     height="80px" />
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <g
+     clip-rule="evenodd"
+     id="g13"
+     style="fill:#ffffff;stroke:none;stroke-width:1.82806"
+     transform="matrix(0.80381931,0,0,0.80381931,-0.85492025,-0.11580839)">
+    <path
+       d="M 12.983,10.59 30.001,98.813 24.129,39.764 53.15,37.872 53.096,27.989 64.549,1 53.622,18.977 Z"
+       id="path5"
+       style="stroke-width:1.35206" />
+    <path
+       d="m 59.389,54.548 5.16,-53.541 -8.74,39.716 -19.612,1.045 1.57,20.462 -7.766,36.583 12.057,-39.899 z"
+       id="path7"
+       style="stroke-width:1.35206" />
+    <path
+       d="M 62.8,67.182 63.349,56.729 47.37,60.484 47.338,72.281 30.001,98.813 51.681,71.197 Z m 2.911,-4.788 14.841,-4.731 1.509,-12.532 -15.899,2.095 z M 72.07,44.502 83.058,43.085 84.639,32.807 76.56,32.434 64.549,1 l 8.43,30.967 z"
+       id="path9"
+       style="stroke-width:1.35206" />
+    <path
+       d="M 87.413,31.294 88.669,21.788 79.125,19.094 64.549,1 l 14.483,22.437 -0.422,7 z"
+       id="path11"
+       style="stroke-width:1.35206" />
+  </g>
+  <!---->
+</svg>
