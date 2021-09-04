@@ -111,11 +111,11 @@ function BasePage01(props) {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md="auto">
-              <Typography variant="span" className={classes.headerText}>
-                Action
-              </Typography>
-            </Grid>
+            {props.actions && (
+              <Grid item xs={12} md="auto">
+                {props.actions}
+              </Grid>
+            )}
           </Grid>
 
           <Divider className={classes.divider} />

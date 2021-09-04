@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 
 import BasePage01 from '../base/base01';
 
@@ -13,7 +13,11 @@ export function DashboardScreen1() {
 
   return (
     <div>
-      <BasePage01 title="Sales Dashboard" crumb={['Dashboards', 'Sales']}>
+      <BasePage01
+        title="Sales Dashboard"
+        crumb={['Dashboards', 'Sales']}
+        actions={<Typography variant="span">Actions</Typography>}
+      >
         <Card>
           <CardContent>Sales dashboard content</CardContent>
         </Card>

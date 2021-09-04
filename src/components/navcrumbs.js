@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumbs, makeStyles, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((_theme) => ({
   breadcrumbs: {
     fontSize: '0.9rem',
   },
