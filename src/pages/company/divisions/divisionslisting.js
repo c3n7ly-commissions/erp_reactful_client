@@ -23,9 +23,31 @@ function DivisionsListing() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const cols = [
+    { field: 'id', headerName: 'ID' },
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'created_at', headerName: 'Created At', flex: 1 },
     { field: 'updated_at', headerName: 'Updated At', flex: 1 },
+    {
+      field: 'action',
+      headerName: 'Action',
+      disableClickEventBubling: true,
+      width: 120,
+      renderCell: (params) => {
+        const onClick = () => {
+          console.log(params.row);
+        };
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={onClick}
+          >
+            Actions
+          </Button>
+        );
+      },
+    },
   ];
 
   const fetchData = () => {
