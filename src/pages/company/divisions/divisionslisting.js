@@ -67,7 +67,10 @@ function DivisionsListing() {
               open={Boolean(menuAnchors[params.row.id])}
               onClose={handleMenuClose(params.row.id)}
             >
-              <MenuItem onClick={handleMenuClose(params.row.id)}>
+              <MenuItem
+                onClick={handleMenuClose(params.row.id)}
+                disabled={true}
+              >
                 {params.row.id}
               </MenuItem>
               <MenuItem onClick={handleMenuClose(params.row.id)}>View</MenuItem>
