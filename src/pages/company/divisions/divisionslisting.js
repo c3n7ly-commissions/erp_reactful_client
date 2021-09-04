@@ -1,10 +1,24 @@
 import React from 'react';
-import { Typography, Card, CardContent, Button } from '@material-ui/core';
+import {
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  makeStyles,
+} from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 
+const useStyles = makeStyles((theme) => ({
+  cardHeader: {
+    fontWeight: 300,
+    marginBottom: theme.spacing(1.5),
+  },
+}));
+
 function DivisionsListing() {
+  const classes = useStyles();
   const rows = [
     { id: 1, col1: 'Hello', col2: 'Grid' },
     { id: 2, col1: 'Data', col2: 'Good' },
@@ -31,7 +45,9 @@ function DivisionsListing() {
     >
       <Card>
         <CardContent>
-          <Typography paragraph>Content goes here</Typography>
+          <Typography variant="subtitle2" className={classes.cardHeader}>
+            Divisions
+          </Typography>
           <div style={{ height: '70vh', width: '100%' }}>
             <DataGrid rows={rows} columns={cols} />
           </div>
