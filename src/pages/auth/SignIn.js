@@ -9,6 +9,7 @@ import {
   createTheme,
   ThemeProvider,
   Snackbar,
+  CircularProgress,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { grey } from '@material-ui/core/colors';
@@ -58,6 +59,17 @@ const useStyles = makeStyles((_theme) => ({
   fullWidth: {
     minWidth: '100%',
   },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  circularProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: '-12px',
+    marginLeft: '-12px',
+  },
 }));
 
 function SignInScreen() {
@@ -77,6 +89,8 @@ function SignInScreen() {
     open: false,
     type: 'success',
   });
+
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -117,17 +131,20 @@ function SignInScreen() {
       value: 'Signing In',
     });
 
+    setLoading(true);
     const params = new URLSearchParams();
     params.append('email', formValues['email']);
     params.append('password', formValues['password']);
 
     const signedIn = (response) => {
       // if we are here the response is 2xx
+      setLoading(false);
       history.push('/dashboard_screen_1');
       console.log(response);
     };
 
     const errorSigningIn = (error) => {
+      setLoading(false);
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
@@ -232,14 +249,23 @@ function SignInScreen() {
                       </Grid>
 
                       <Grid item xs={12}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.signInButton}
-                          onClick={signInClicked}
-                        >
-                          Sign In
-                        </Button>
+                        <div className={classes.wrapper}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.signInButton}
+                            onClick={signInClicked}
+                            disabled={loading}
+                          >
+                            Sign In
+                          </Button>
+                          {loading && (
+                            <CircularProgress
+                              size={24}
+                              className={classes.circularProgress}
+                            />
+                          )}
+                        </div>
 
                         <Button
                           color="primary"
