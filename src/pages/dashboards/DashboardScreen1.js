@@ -15,7 +15,7 @@ export function DashboardScreen1() {
     <div>
       <BasePage01 title="Sales Dashboard" crumb={['Dashboards', 'Sales']}>
         <Card>
-          <CardContent>Dashboards</CardContent>
+          <CardContent>Sales dashboard content</CardContent>
         </Card>
       </BasePage01>
     </div>
