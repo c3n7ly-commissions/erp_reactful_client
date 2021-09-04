@@ -3,6 +3,7 @@ import {
   CssBaseline,
   Divider,
   Typography,
+  Grid,
   ThemeProvider,
   createTheme,
 } from '@material-ui/core';
@@ -25,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   headerText: {
-    marginTop: theme.spacing(1),
     fontWeight: 600,
-    marginBottom: theme.spacing(0.5),
+  },
+  headerGrid: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    flexGrow: 1,
   },
 }));
 
@@ -86,10 +90,33 @@ function BasePage01(props) {
         />
         <div className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography variant="h5" className={classes.headerText}>
-            {props.title}
-          </Typography>
-          <NavBreadcrumbs crumb={props.crumb} />
+          <Grid
+            container
+            spacing={1}
+            alignItems="flex-start"
+            direction="row"
+            className={classes.headerGrid}
+          >
+            <Grid item xs={12} md>
+              <Grid container spacing={0}>
+                <Grid item xs={12}>
+                  <Typography variant="h5" className={classes.headerText}>
+                    {props.title}
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <NavBreadcrumbs crumb={props.crumb} />
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md="auto">
+              <Typography variant="span" className={classes.headerText}>
+                Action
+              </Typography>
+            </Grid>
+          </Grid>
 
           <Divider className={classes.divider} />
 
