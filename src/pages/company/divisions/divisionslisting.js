@@ -4,6 +4,8 @@ import {
   Card,
   CardContent,
   Button,
+  Menu,
+  MenuItem,
   makeStyles,
 } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
@@ -21,7 +23,16 @@ const useStyles = makeStyles((theme) => ({
 function DivisionsListing() {
   const classes = useStyles();
   const [rows, setRows] = useState([]);
+  const [menuAnchors, setMenuAnchors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const handleMenuClose = (id) => {
+    return () => {
+      let { ...tmpMenuAnchors } = menuAnchors;
+      tmpMenuAnchors[id] = null;
+      setMenuAnchors(tmpMenuAnchors);
+    };
+  };
   const cols = [
     { field: 'id', headerName: 'ID' },
     { field: 'name', headerName: 'Name', flex: 1 },
@@ -33,18 +44,41 @@ function DivisionsListing() {
       disableClickEventBubling: true,
       width: 120,
       renderCell: (params) => {
-        const onClick = () => {
+        const onClick = (event) => {
           console.log(params.row);
+
+          let { ...tmpMenuAnchors } = menuAnchors;
+          tmpMenuAnchors[params.row.id] = event.currentTarget;
+          setMenuAnchors(tmpMenuAnchors);
         };
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={onClick}
-          >
-            Actions
-          </Button>
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={onClick}
+            >
+              Actions
+            </Button>
+            <Menu
+              anchorEl={menuAnchors[params.row.id]}
+              keepMounted
+              open={Boolean(menuAnchors[params.row.id])}
+              onClose={handleMenuClose(params.row.id)}
+            >
+              <MenuItem onClick={handleMenuClose(params.row.id)}>
+                {params.row.id}
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose(params.row.id)}>View</MenuItem>
+              <MenuItem onClick={handleMenuClose(params.row.id)}>
+                Update
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose(params.row.id)}>
+                Delete
+              </MenuItem>
+            </Menu>
+          </div>
         );
       },
     },
