@@ -7,6 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  Collapse,
   ThemeProvider,
   makeStyles,
   createTheme,
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
   },
   listExpandIcon: {
     color: '#57616F',
+  },
+  listItemNested: {
+    paddingLeft: '78px',
+    color: '#C4C4C4',
   },
 }));
 
@@ -132,6 +137,16 @@ function NavigationDrawer(props) {
             <ExpandMore className={classes.listExpandIcon} />
           )}
         </ListItem>
+        <Collapse in={navItemOpen['dashboard']} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.listItemNested}>
+              <ListItemText
+                primary="Analytics"
+                classes={{ primary: classes.listText }}
+              />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button>
           <ListItemIcon className={classes.navIcon}>
