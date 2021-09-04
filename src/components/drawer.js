@@ -148,7 +148,7 @@ function NavigationDrawer(props) {
           </List>
         </Collapse>
 
-        <ListItem button>
+        <ListItem button onClick={handleNavItemClick('company')}>
           <ListItemIcon className={classes.navIcon}>
             <BusinessOutlinedIcon />
           </ListItemIcon>
@@ -156,7 +156,28 @@ function NavigationDrawer(props) {
             primary="Company"
             classes={{ primary: classes.listText }}
           />
+          {navItemOpen['company'] ? (
+            <ExpandLess className={classes.listExpandIcon} />
+          ) : (
+            <ExpandMore className={classes.listExpandIcon} />
+          )}
         </ListItem>
+        <Collapse in={navItemOpen['company']} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.listItemNested}>
+              <ListItemText
+                primary="Divisions"
+                classes={{ primary: classes.listText }}
+              />
+            </ListItem>
+            <ListItem button className={classes.listItemNested}>
+              <ListItemText
+                primary="Branches"
+                classes={{ primary: classes.listText }}
+              />
+            </ListItem>
+          </List>
+        </Collapse>
       </List>
 
       <List
