@@ -1,9 +1,19 @@
 import React from 'react';
 import { Typography, Card, CardContent, Button } from '@material-ui/core';
+import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 
 function DivisionsListing() {
+  const rows = [
+    { id: 1, col1: 'Hello', col2: 'Grid' },
+    { id: 2, col1: 'Data', col2: 'Good' },
+  ];
+  const cols = [
+    { field: 'col1', headerName: 'Column 1', flex: 1 },
+    { field: 'col2', headerName: 'Column 2', flex: 1 },
+  ];
+
   return (
     <BasePage01
       crumb={['Company', 'Divisions']}
@@ -22,21 +32,9 @@ function DivisionsListing() {
       <Card>
         <CardContent>
           <Typography paragraph>Content goes here</Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
+          <div style={{ height: '70vh', width: '100%' }}>
+            <DataGrid rows={rows} columns={cols} />
+          </div>
         </CardContent>
       </Card>
     </BasePage01>
