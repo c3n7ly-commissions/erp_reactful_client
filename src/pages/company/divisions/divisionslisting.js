@@ -34,10 +34,10 @@ function DivisionsListing() {
     };
   };
   const cols = [
-    { field: 'id', headerName: 'ID' },
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'created_at', headerName: 'Created At', flex: 1 },
-    { field: 'updated_at', headerName: 'Updated At', flex: 1 },
+    { field: 'id', headerName: 'ID', minWidth: 100 },
+    { field: 'name', headerName: 'Name', flex: 1, minWidth: 200 },
+    { field: 'created_at', headerName: 'Created At', flex: 1, minWidth: 200 },
+    { field: 'updated_at', headerName: 'Updated At', flex: 1, minWidth: 200 },
     {
       field: 'action',
       headerName: 'Action',
