@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import { Typography, Card, CardContent, Button } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 
 function DivisionsListing() {
@@ -7,7 +8,16 @@ function DivisionsListing() {
     <BasePage01
       crumb={['Company', 'Divisions']}
       title="Divisions"
-      actions={<Typography variant="span">Actions</Typography>}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<AddIcon />}
+        >
+          Add Division
+        </Button>
+      }
     >
       <Card>
         <CardContent>
