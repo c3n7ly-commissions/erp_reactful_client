@@ -3,6 +3,8 @@ import {
   CssBaseline,
   Card,
   CardContent,
+  Breadcrumbs,
+  Typography,
   ThemeProvider,
   createTheme,
 } from '@material-ui/core';
@@ -59,12 +61,19 @@ function BasePage01(props) {
           mobileOpen={mobileOpen}
           handleDrawerToggle={handleDrawerToggle}
         />
-        <main className={classes.content}>
+        <div className={classes.content}>
           <div className={classes.toolbar} />
-          <Card>
-            <CardContent>{props.children}</CardContent>
-          </Card>
-        </main>
+          <Breadcrumbs aria-label="breadcrumbs">
+            <Typography color="textPrimary">Dashboard</Typography>
+            <Typography color="textPrimary">Analytics</Typography>
+          </Breadcrumbs>
+
+          <main>
+            <Card>
+              <CardContent>{props.children}</CardContent>
+            </Card>
+          </main>
+        </div>
       </ThemeProvider>
     </div>
   );
