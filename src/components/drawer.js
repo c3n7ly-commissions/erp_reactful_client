@@ -19,6 +19,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router';
 import ListItemButton from './drawer/listitembutton';
+import ListItemLink from './drawer/listitemlink';
 
 const drawerWidth = 240;
 
@@ -60,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
   listItemNested: {
     paddingLeft: '78px',
-    color: '#C4C4C4',
+    // color: '#C4C4C4',
+    color: '#f00',
   },
 }));
 
@@ -141,16 +143,10 @@ function NavigationDrawer(props) {
         />
         <Collapse in={navItemOpen['dashboard']} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItem
-              button
-              className={classes.listItemNested}
-              onClick={handleNavLinkClick('/dashboard_screen_1')}
-            >
-              <ListItemText
-                primary="Sales"
-                classes={{ primary: classes.listText }}
-              />
-            </ListItem>
+            <ListItemLink
+              itemText="Salesing"
+              clickHandler={handleNavLinkClick('/dashboard_screen_1')}
+            />
           </List>
         </Collapse>
 
