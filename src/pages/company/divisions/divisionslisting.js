@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Card,
@@ -9,6 +9,7 @@ import {
 import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
@@ -19,14 +20,44 @@ const useStyles = makeStyles((theme) => ({
 
 function DivisionsListing() {
   const classes = useStyles();
-  const rows = [
-    { id: 1, col1: 'Hello', col2: 'Grid' },
-    { id: 2, col1: 'Data', col2: 'Good' },
-  ];
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
   const cols = [
-    { field: 'col1', headerName: 'Column 1', flex: 1 },
-    { field: 'col2', headerName: 'Column 2', flex: 1 },
+    { field: 'name', headerName: 'Name', flex: 1 },
+    { field: 'created_at', headerName: 'Created At', flex: 1 },
+    { field: 'updated_at', headerName: 'Updated At', flex: 1 },
   ];
+
+  const fetchData = () => {
+    axios.defaults.withCredentials = true;
+    setLoading(true);
+    const config = {
+      xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
+      withCredentials: true,
+      headers: {
+        Authorization: 'Bearer ' + window.sessionStorage.getItem('token'),
+      },
+    };
+    const response = axios.get('/sanctum/csrf-cookie').then((_response) => {
+      axios
+        .get('/api/divisions', config)
+        .then((response) => {
+          console.log(response.data.data);
+          setLoading(false);
+          setRows([...response.data.data]);
+        })
+        .catch((error) => {
+          // do sth
+          setLoading(false);
+          console.log(error);
+        });
+    });
+    return response;
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <BasePage01
@@ -49,7 +80,7 @@ function DivisionsListing() {
             Divisions
           </Typography>
           <div style={{ height: '70vh', width: '100%' }}>
-            <DataGrid rows={rows} columns={cols} />
+            <DataGrid rows={rows} columns={cols} loading={loading} />
           </div>
         </CardContent>
       </Card>
