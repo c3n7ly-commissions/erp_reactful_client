@@ -3,7 +3,7 @@ import { Breadcrumbs, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbs: {
-    paddingBottom: theme.spacing(3),
+    paddingBottom: theme.spacing(2),
     fontSize: '0.9rem',
   },
   text: {

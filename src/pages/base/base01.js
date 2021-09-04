@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   Divider,
+  Typography,
   ThemeProvider,
   createTheme,
 } from '@material-ui/core';
@@ -25,9 +26,30 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     marginBottom: theme.spacing(3),
   },
+  headerText: {
+    marginTop: theme.spacing(1),
+    fontWeight: 600,
+    marginBottom: theme.spacing(0.5),
+  },
 }));
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+
   palette: {
     primary: {
       main: '#f00',
@@ -66,6 +88,9 @@ function BasePage01(props) {
         />
         <div className={classes.content}>
           <div className={classes.toolbar} />
+          <Typography variant="h5" className={classes.headerText}>
+            Analytics Dashboard
+          </Typography>
           <NavBreadcrumbs />
 
           <Divider className={classes.divider} />
