@@ -12,16 +12,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavBreadcrumbs() {
+function NavBreadcrumbs(props) {
   const classes = useStyles();
+  const crumbs = props.crumb.map((item, index) => (
+    <Typography
+      color="textPrimary"
+      className={classes.text}
+      key={index.toString()}
+    >
+      {item}
+    </Typography>
+  ));
   return (
     <Breadcrumbs aria-label="breadcrumbs" className={classes.breadcrumbs}>
-      <Typography color="textPrimary" className={classes.text}>
-        Dashboard
-      </Typography>
-      <Typography color="textPrimary" className={classes.text}>
-        Analytics
-      </Typography>
+      {crumbs}
     </Breadcrumbs>
   );
 }

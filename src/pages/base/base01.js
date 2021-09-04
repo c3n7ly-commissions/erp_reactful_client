@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   divider: {
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(2),
   },
   headerText: {
     marginTop: theme.spacing(1),
@@ -89,9 +89,9 @@ function BasePage01(props) {
         <div className={classes.content}>
           <div className={classes.toolbar} />
           <Typography variant="h5" className={classes.headerText}>
-            Analytics Dashboard
+            {props.title}
           </Typography>
-          <NavBreadcrumbs />
+          <NavBreadcrumbs crumb={props.crumb} />
 
           <Divider className={classes.divider} />
 
