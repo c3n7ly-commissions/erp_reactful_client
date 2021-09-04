@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: OverpassMono-Light
+font link: https://fonts.google.com/specimen/Overpass+Mono
+font author: Delve Withrington
+font author site: https://www.delvefonts.com/
+
+
+icon designer: Larisa Skosyrska
+icon designer link: /Lara.Skosyrska
+        
+{"bg":"#50A6D8","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      

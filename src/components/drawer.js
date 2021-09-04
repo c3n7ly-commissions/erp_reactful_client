@@ -7,13 +7,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
   ThemeProvider,
   makeStyles,
   createTheme,
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import MailIcon from '@material-ui/icons/Mail';
+import logo from '../assets/images/c3n7_erp-logo/vector/default-monochrome-white.svg';
 
 const drawerWidth = 240;
 
@@ -82,9 +82,7 @@ function NavigationDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.drawerHeader}>
-        <Typography variant="h6" noWrap>
-          ERP
-        </Typography>
+        <img src={logo} alt="logo" height={40} />
       </div>
       <Divider />
       <List>
