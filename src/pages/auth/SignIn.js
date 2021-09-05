@@ -132,7 +132,7 @@ function SignInScreen() {
     });
 
     setLoading(true);
-    const params = new URLSearchParams();
+    const params = new FormData();
     params.append('email', formValues['email']);
     params.append('password', formValues['password']);
 

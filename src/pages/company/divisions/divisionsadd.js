@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import BasePage01 from '../../base/base01';
+import httpHelper from '../../../utils/httphelper';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
@@ -53,6 +54,14 @@ function DivisionsAdd() {
     };
   };
 
+  function successCallback(response) {
+    console.log(response);
+  }
+
+  function errorCallback(error) {
+    console.log(error);
+  }
+
   const saveClicked = () => {
     let { ...validations } = formValidations;
 
@@ -68,6 +77,14 @@ function DivisionsAdd() {
 
     setLoading(true);
     console.log('submitting');
+    const formData = new FormData();
+    formData.append('name', formValues['divisionName']);
+    httpHelper.postData(
+      '/api/divisions',
+      formData,
+      successCallback,
+      errorCallback
+    );
   };
 
   return (
