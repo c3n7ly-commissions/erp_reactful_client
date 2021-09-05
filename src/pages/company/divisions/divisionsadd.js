@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   Card,
@@ -22,6 +22,39 @@ const useStyles = makeStyles((theme) => ({
 
 function DivisionsAdd() {
   const classes = useStyles();
+  const [formValues, setFormValues] = useState({
+    divisionName: '',
+  });
+
+  const [formValidations, setFormValidations] = useState({
+    divisionName: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const fieldChangedClosure = (fieldName) => {
+    return (event) => {
+      let { ...tmpVals } = formValues;
+      tmpVals[fieldName] = event.target.value;
+      setFormValues({ ...tmpVals });
+    };
+  };
+
+  const saveClicked = () => {
+    let { ...validations } = formValidations;
+
+    validations['divisionName'] =
+      formValues['divisionName'] === ''
+        ? 'This field should not be left empty'
+        : '';
+
+    setFormValidations(validations);
+    if (validations['divisionName'] !== '') {
+      return;
+    }
+    console.log('submitting');
+  };
+
   return (
     <BasePage01 crumb={['Company', 'Divisions', 'Add']} title="Add Division">
       <Card>
@@ -34,6 +67,10 @@ function DivisionsAdd() {
               <TextField
                 required
                 label="Division Name"
+                value={formValues['divisionName']}
+                error={formValidations['divisionName'] !== ''}
+                helperText={formValidations['divisionName']}
+                onChange={fieldChangedClosure('divisionName')}
                 variant="outlined"
                 className={classes.textField}
               />
@@ -44,6 +81,8 @@ function DivisionsAdd() {
                 variant="contained"
                 color="primary"
                 size="small"
+                onClick={saveClicked}
+                disabled={loading}
                 startIcon={<SaveIcon />}
               >
                 Save

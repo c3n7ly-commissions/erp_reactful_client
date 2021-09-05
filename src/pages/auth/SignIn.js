@@ -104,7 +104,7 @@ function SignInScreen() {
 
   const fieldChangedClosure = (fieldName) => {
     return function fieldChanged(event) {
-      let tmpVals = formValues;
+      let { ...tmpVals } = formValues;
       tmpVals[fieldName] = event.target.value;
       setFormValues({ ...tmpVals });
     };
