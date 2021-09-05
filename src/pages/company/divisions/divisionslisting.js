@@ -78,10 +78,7 @@ function DivisionsListing() {
               >
                 {params.row.id}
               </MenuItem>
-              <MenuItem onClick={handleMenuClose(params.row.id)}>View</MenuItem>
-              <MenuItem onClick={handleMenuClose(params.row.id)}>
-                Update
-              </MenuItem>
+              <MenuItem onClick={handleMenuClose(params.row.id)}>Edit</MenuItem>
               <MenuItem onClick={handleMenuClose(params.row.id)}>
                 Delete
               </MenuItem>
