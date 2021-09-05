@@ -16,7 +16,7 @@ export function DashboardScreen1() {
       <BasePage01
         title="Sales Dashboard"
         crumb={['Dashboards', 'Sales']}
-        actions={<Typography variant="span">Actions</Typography>}
+        actions={<Typography variant="body1">Actions</Typography>}
       >
         <Card>
           <CardContent>Sales dashboard content</CardContent>
