@@ -46,6 +46,13 @@ function DivisionsAdd() {
 
   const [loading, setLoading] = useState(false);
 
+  const [snackBarState, setSnackBarState] = useState({
+    open: true,
+    autoHideDuration: 6000,
+    value: 'rasta',
+    type: 'success',
+  });
+
   const fieldChangedClosure = (fieldName) => {
     return (event) => {
       let { ...tmpVals } = formValues;
@@ -88,7 +95,21 @@ function DivisionsAdd() {
   };
 
   return (
-    <BasePage01 crumb={['Company', 'Divisions', 'Add']} title="Add Division">
+    <BasePage01
+      crumb={['Company', 'Divisions', 'Add']}
+      title="Add Division"
+      snackbar={{
+        closeHandler: () => {
+          setSnackBarState({
+            open: false,
+            autoHideDuration: 6000,
+            value: '',
+            type: 'success',
+          });
+        },
+        ...snackBarState,
+      }}
+    >
       <Card>
         <CardContent>
           <Typography variant="subtitle2" className={classes.cardHeader}>
