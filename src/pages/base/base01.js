@@ -4,9 +4,11 @@ import {
   Divider,
   Typography,
   Grid,
+  Snackbar,
   ThemeProvider,
   createTheme,
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core';
 import NavigationDrawer from '../../components/drawer';
 import NavBar from '../../components/navbar';
@@ -121,6 +123,18 @@ function BasePage01(props) {
           <Divider className={classes.divider} />
 
           <main>{props.children}</main>
+
+          {props.snackbar && (
+            <Snackbar
+              open={props.snackbar.open}
+              onClose={props.snackbar.closeHandler}
+              autoHideDuration={props.snackbar.autoHideDuration}
+            >
+              <Alert severity={props.snackbar.type}>
+                {props.snackbar.value}
+              </Alert>
+            </Snackbar>
+          )}
         </div>
       </ThemeProvider>
     </div>
