@@ -66,6 +66,14 @@ function DivisionsAdd() {
 
   function successCallback(response) {
     console.log(response);
+    setLoading(false);
+    setSnackBarState({
+      open: true,
+      type: 'success',
+      value: 'record saved',
+      redirect: '/divisions',
+      duration: 1500,
+    });
   }
 
   function errorCallback(error) {
