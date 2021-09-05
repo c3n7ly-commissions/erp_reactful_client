@@ -23,9 +23,12 @@ const useStyles = makeStyles((theme) => ({
 
 function DivisionsListing() {
   const classes = useStyles();
+
   const [rows, setRows] = useState([]);
   const [menuAnchors, setMenuAnchors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [pageSize, setPageSize] = React.useState(10);
+
   const history = useHistory();
 
   const handleMenuClose = (id) => {
@@ -144,7 +147,15 @@ function DivisionsListing() {
             Divisions
           </Typography>
           <div style={{ height: '70vh', width: '100%' }}>
-            <DataGrid rows={rows} columns={cols} loading={loading} />
+            <DataGrid
+              rows={rows}
+              columns={cols}
+              loading={loading}
+              pageSize={pageSize}
+              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+              rowsPerPageOptions={[10, 25, 50, 100]}
+              pagination
+            />
           </div>
         </CardContent>
       </Card>
