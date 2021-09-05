@@ -53,6 +53,7 @@ function DivisionsAdd() {
     value: '',
     type: 'success',
     redirect: false,
+    duration: -1,
   });
 
   const fieldChangedClosure = (fieldName) => {
@@ -83,6 +84,7 @@ function DivisionsAdd() {
           type: 'error',
           value: error.response.data.message,
           redirect: '/',
+          duration: 1500,
         });
       } else if (error.response.status === 409) {
         setSnackBarState({
@@ -154,7 +156,10 @@ function DivisionsAdd() {
             history.replace(snackBarState.redirect);
           }
         },
-        autoHideDuration: 6000,
+        autoHideDuration:
+          snackBarState.duration && snackBarState.duration > 0
+            ? snackBarState.duration
+            : 6000,
         ...snackBarState,
       }}
     >
