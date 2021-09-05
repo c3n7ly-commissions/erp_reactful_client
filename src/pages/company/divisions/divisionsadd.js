@@ -6,10 +6,12 @@ import {
   Grid,
   TextField,
   Button,
+  CircularProgress,
   makeStyles,
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import BasePage01 from '../../base/base01';
+
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
     fontWeight: 300,
@@ -17,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     minWidth: '100%',
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  circularProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: '-10px',
+    marginLeft: '-10px',
   },
 }));
 
@@ -52,6 +65,8 @@ function DivisionsAdd() {
     if (validations['divisionName'] !== '') {
       return;
     }
+
+    setLoading(true);
     console.log('submitting');
   };
 
@@ -77,16 +92,28 @@ function DivisionsAdd() {
             </Grid>
 
             <Grid item xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={saveClicked}
-                disabled={loading}
-                startIcon={<SaveIcon />}
-              >
-                Save
-              </Button>
+              <Grid container spacing={0}>
+                <Grid item xs="auto">
+                  <div className={classes.wrapper}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={saveClicked}
+                      disabled={loading}
+                      startIcon={<SaveIcon />}
+                    >
+                      Save
+                    </Button>
+                    {loading && (
+                      <CircularProgress
+                        size={20}
+                        className={classes.circularProgress}
+                      />
+                    )}
+                  </div>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>
