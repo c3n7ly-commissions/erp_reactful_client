@@ -5,14 +5,17 @@ import {
   Typography,
   Table,
   TableCell,
-  TableHead,
   TableBody,
+  Button,
   TableRow,
   TableContainer,
   makeStyles,
 } from '@material-ui/core';
-import BasePage01 from '../../base/base01';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom';
+
+import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
 
 const useStyles = makeStyles({
@@ -23,6 +26,7 @@ const useStyles = makeStyles({
 
 function DivisionView() {
   const classes = useStyles();
+  const history = useHistory();
   let { id } = useParams();
 
   const [rows, setRows] = useState([]);
@@ -59,7 +63,19 @@ function DivisionView() {
     <BasePage01
       crumb={['Company', 'Divisions', 'View', id]}
       title={`View Division ${id}`}
-      actions={<Typography variant="body1">Actions</Typography>}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<ChevronLeftIcon />}
+          onClick={() => {
+            history.push('/divisions');
+          }}
+        >
+          All Divisions
+        </Button>
+      }
     >
       <Card>
         <CardContent>
