@@ -1,12 +1,14 @@
 import React from 'react';
 import { Typography, Card, CardContent } from '@material-ui/core';
-import BasePage01 from './base01';
+import BasePage01 from '../../base/base01';
+import { useParams } from 'react-router-dom';
 
-function BlankScreen01() {
+function DivisionView() {
+  let { id } = useParams();
   return (
     <BasePage01
-      crumb={['Blanks', 'Blank 01']}
-      title="Blank 01"
+      crumb={['Company', 'Divisions', 'View', id]}
+      title={`View Division ${id}`}
       actions={<Typography variant="body1">Actions</Typography>}
     >
       <Card>
@@ -33,4 +35,4 @@ function BlankScreen01() {
   );
 }
 
-export default BlankScreen01;
+export default DivisionView;
