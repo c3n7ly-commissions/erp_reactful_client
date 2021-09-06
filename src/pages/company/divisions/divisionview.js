@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,21 +7,28 @@ import {
   TableBody,
   Button,
   TableRow,
+  Grid,
   TableContainer,
   makeStyles,
-} from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { useHistory } from 'react-router';
-import { useParams } from 'react-router-dom';
+} from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
 
-import BasePage01 from '../../base/base01';
-import httpHelper from '../../../utils/httphelper';
+import BasePage01 from "../../base/base01";
+import httpHelper from "../../../utils/httphelper";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: '100%',
+    minWidth: "100%",
   },
-});
+  actionCell: {
+    paddingTop: theme.spacing(1.5),
+    paddingBottom: theme.spacing(1.5),
+  },
+}));
 
 function DivisionView() {
   const classes = useStyles();
@@ -35,7 +42,7 @@ function DivisionView() {
     let tmpRows = [];
     for (let key in response.data.data) {
       let tmpRow = { name: key, value: response.data.data[key] };
-      if (key !== 'links') {
+      if (key !== "links") {
         tmpRows.push(tmpRow);
       }
     }
@@ -60,7 +67,7 @@ function DivisionView() {
 
   return (
     <BasePage01
-      crumb={['Company', 'Divisions', 'View', id]}
+      crumb={["Company", "Divisions", "View", id]}
       title={`View Division ${id}`}
       actions={
         <Button
@@ -69,7 +76,7 @@ function DivisionView() {
           size="small"
           startIcon={<ChevronLeftIcon />}
           onClick={() => {
-            history.push('/divisions');
+            history.push("/divisions");
           }}
         >
           All Divisions
@@ -86,9 +93,42 @@ function DivisionView() {
                     <TableCell component="th" scope="row">
                       <strong>{row.name}</strong>
                     </TableCell>
-                    <TableCell>{row.value}</TableCell>
+                    <TableCell>{row.value === "" ? "-" : row.value}</TableCell>
                   </TableRow>
                 ))}
+                <TableRow>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    className={classes.actionCell}
+                  >
+                    <strong>Actions</strong>
+                  </TableCell>
+                  <TableCell className={classes.actionCell}>
+                    <Grid container direction="row" spacing={1}>
+                      <Grid item xs="auto">
+                        <Button
+                          color="primary"
+                          startIcon={<EditIcon />}
+                          variant="outlined"
+                          size="small"
+                        >
+                          Edit
+                        </Button>
+                      </Grid>
+                      <Grid item xs="auto">
+                        <Button
+                          startIcon={<DeleteOutlinedIcon />}
+                          color="secondary"
+                          variant="outlined"
+                          size="small"
+                        >
+                          Delete
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
