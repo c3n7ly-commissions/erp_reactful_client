@@ -12,6 +12,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 import axios from 'axios';
+import httpHelper from '../../../utils/httphelper';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,34 +90,23 @@ function DivisionsListing() {
     },
   ];
 
-  const fetchData = () => {
-    axios.defaults.withCredentials = true;
-    setLoading(true);
-    const config = {
-      xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
-      withCredentials: true,
-      headers: {
-        Authorization: 'Bearer ' + window.sessionStorage.getItem('token'),
-      },
-    };
-    const response = axios.get('/sanctum/csrf-cookie').then((_response) => {
-      axios
-        .get('/api/divisions', config)
-        .then((response) => {
-          console.log(response.data.data);
-          setLoading(false);
-          setRows([...response.data.data]);
-        })
-        .catch((error) => {
-          // do sth
-          setLoading(false);
-          console.log(error);
-        });
-    });
-    return response;
+  const successCallback = (response) => {
+    console.log(response.data.data);
+    setLoading(false);
+    setRows([...response.data.data]);
+  };
+  const errorCallback = (error) => {
+    setLoading(false);
+    console.log(error);
   };
 
   useEffect(() => {
+    const fetchData = () => {
+      axios.defaults.withCredentials = true;
+      setLoading(true);
+      httpHelper.getData('/api/divisions', successCallback, errorCallback);
+    };
+
     fetchData();
   }, []);
 
