@@ -126,7 +126,7 @@ function DivisionsListing() {
           size="small"
           startIcon={<AddIcon />}
           onClick={() => {
-            history.push('divisions/add');
+            history.push('/divisions/add');
           }}
         >
           Add Division
