@@ -8,6 +8,7 @@ import BlankScreen01 from './pages/base/blank01';
 import DivisionsListing from './pages/company/divisions/divisionslisting';
 import DivisionsAdd from './pages/company/divisions/divisionsadd';
 import DivisionView from './pages/company/divisions/divisionview';
+import DivisionEdit from './pages/company/divisions/divisionedit';
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
           exact
           path="/divisions/view/:id"
           component={DivisionView}
+        />
+        <ProtectedRoute
+          exact
+          path="/divisions/edit/:id"
+          component={DivisionEdit}
         />
       </Switch>
     </Router>
