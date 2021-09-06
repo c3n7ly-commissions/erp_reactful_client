@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -10,19 +10,19 @@ import {
   Grid,
   TableContainer,
   makeStyles,
-} from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
+} from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 
-import BasePage01 from "../../base/base01";
-import httpHelper from "../../../utils/httphelper";
+import BasePage01 from '../../base/base01';
+import httpHelper from '../../../utils/httphelper';
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: "100%",
+    minWidth: '100%',
   },
   actionCell: {
     paddingTop: theme.spacing(1.5),
@@ -42,7 +42,7 @@ function DivisionView() {
     let tmpRows = [];
     for (let key in response.data.data) {
       let tmpRow = { name: key, value: response.data.data[key] };
-      if (key !== "links") {
+      if (key !== 'links') {
         tmpRows.push(tmpRow);
       }
     }
@@ -67,7 +67,7 @@ function DivisionView() {
 
   return (
     <BasePage01
-      crumb={["Company", "Divisions", "View", id]}
+      crumb={['Company', 'Divisions', 'View', id]}
       title={`View Division ${id}`}
       actions={
         <Button
@@ -76,7 +76,7 @@ function DivisionView() {
           size="small"
           startIcon={<ChevronLeftIcon />}
           onClick={() => {
-            history.push("/divisions");
+            history.push('/divisions');
           }}
         >
           All Divisions
@@ -93,7 +93,7 @@ function DivisionView() {
                     <TableCell component="th" scope="row">
                       <strong>{row.name}</strong>
                     </TableCell>
-                    <TableCell>{row.value === "" ? "-" : row.value}</TableCell>
+                    <TableCell>{row.value === '' ? '-' : row.value}</TableCell>
                   </TableRow>
                 ))}
                 <TableRow>
@@ -112,6 +112,9 @@ function DivisionView() {
                           startIcon={<EditIcon />}
                           variant="outlined"
                           size="small"
+                          onClick={() => {
+                            history.push(`/divisions/edit/${id}`);
+                          }}
                         >
                           Edit
                         </Button>
