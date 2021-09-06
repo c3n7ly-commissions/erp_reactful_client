@@ -1,15 +1,30 @@
 import React from 'react';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import { Typography, Card, CardContent, Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import BasePage01 from '../../base/base01';
 
 function DivisionEdit() {
   let { id } = useParams();
+  const history = useHistory();
   return (
     <BasePage01
       crumb={['Company', 'Divisions', 'Edit', id]}
       title={`Edit Division ${id}`}
-      actions={<Typography variant="body1">Actions</Typography>}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<ChevronLeftIcon />}
+          onClick={() => {
+            history.push('/divisions');
+          }}
+        >
+          All Divisions
+        </Button>
+      }
     >
       <Card>
         <CardContent>
