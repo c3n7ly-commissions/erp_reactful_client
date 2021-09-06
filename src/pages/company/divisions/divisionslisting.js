@@ -79,6 +79,13 @@ function DivisionsListing() {
               >
                 {params.row.id}
               </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  history.push(`/divisions/view/${params.row.id}`);
+                }}
+              >
+                View
+              </MenuItem>
               <MenuItem onClick={handleMenuClose(params.row.id)}>Edit</MenuItem>
               <MenuItem onClick={handleMenuClose(params.row.id)}>
                 Delete

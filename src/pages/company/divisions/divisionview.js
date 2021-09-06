@@ -1,10 +1,34 @@
 import React from 'react';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Table,
+  TableCell,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableContainer,
+  makeStyles,
+} from '@material-ui/core';
 import BasePage01 from '../../base/base01';
 import { useParams } from 'react-router-dom';
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: '100%',
+  },
+});
+
 function DivisionView() {
+  const classes = useStyles();
   let { id } = useParams();
+
+  const rows = [
+    { name: 'jane', age: '20', gender: 'male' },
+    { name: 'jean', age: '25', gender: 'female' },
+  ];
+
   return (
     <BasePage01
       crumb={['Company', 'Divisions', 'View', id]}
@@ -13,22 +37,28 @@ function DivisionView() {
     >
       <Card>
         <CardContent>
-          <Typography paragraph>Content goes here</Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
+          <TableContainer>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell align="right">Age</TableCell>
+                  <TableCell>Gender</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.age}</TableCell>
+                    <TableCell>{row.gender}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </CardContent>
       </Card>
     </BasePage01>
