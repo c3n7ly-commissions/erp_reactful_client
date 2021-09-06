@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import BasePage01 from '../../base/base01';
 import { useParams } from 'react-router-dom';
+import httpHelper from '../../../utils/httphelper';
 
 const useStyles = makeStyles({
   table: {
@@ -24,10 +25,35 @@ function DivisionView() {
   const classes = useStyles();
   let { id } = useParams();
 
-  const rows = [
-    { name: 'jane', age: '20', gender: 'male' },
-    { name: 'jean', age: '25', gender: 'female' },
-  ];
+  const [rows, setRows] = useState([]);
+
+  const successCallback = (response) => {
+    console.log(response.data.data);
+    let tmpRows = [];
+    for (let key in response.data.data) {
+      let tmpRow = { name: key, value: response.data.data[key] };
+      if (key !== 'links') {
+        tmpRows.push(tmpRow);
+      }
+    }
+    setRows(tmpRows);
+  };
+
+  const errorCallback = (error) => {
+    console.log(error);
+  };
+
+  useEffect(() => {
+    const fetchData = () => {
+      httpHelper.getData(
+        `/api/divisions/${id}`,
+        successCallback,
+        errorCallback
+      );
+    };
+
+    fetchData();
+  }, [id]);
 
   return (
     <BasePage01
@@ -39,21 +65,13 @@ function DivisionView() {
         <CardContent>
           <TableContainer>
             <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Age</TableCell>
-                  <TableCell>Gender</TableCell>
-                </TableRow>
-              </TableHead>
               <TableBody>
                 {rows.map((row) => (
                   <TableRow key={row.name}>
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      <strong>{row.name}</strong>
                     </TableCell>
-                    <TableCell align="right">{row.age}</TableCell>
-                    <TableCell>{row.gender}</TableCell>
+                    <TableCell>{row.value}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -11,7 +11,6 @@ import {
 import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
-import axios from 'axios';
 import httpHelper from '../../../utils/httphelper';
 import { useHistory } from 'react-router';
 
@@ -109,7 +108,6 @@ function DivisionsListing() {
 
   useEffect(() => {
     const fetchData = () => {
-      axios.defaults.withCredentials = true;
       setLoading(true);
       httpHelper.getData('/api/divisions', successCallback, errorCallback);
     };
