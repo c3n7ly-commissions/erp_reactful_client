@@ -43,9 +43,23 @@ function DivisionsListing() {
     };
   };
 
+  const deletingSuccessCallback = (response) => {
+    console.log(response);
+  };
+
+  const deletingErrorCallback = (error) => {
+    console.log(error);
+  };
+
   const deleteRecordClosure = (id) => {
     return () => {
       console.log('Deleting', id);
+
+      httpHelper.deleteData(
+        '/api/divisions',
+        deletingSuccessCallback,
+        deletingErrorCallback
+      );
     };
   };
 
@@ -145,12 +159,12 @@ function DivisionsListing() {
     },
   ];
 
-  const successCallback = (response) => {
+  const loadingSuccessCallback = (response) => {
     console.log(response.data.data);
     setLoading(false);
     setRows([...response.data.data]);
   };
-  const errorCallback = (error) => {
+  const loadingErrorCallback = (error) => {
     setLoading(false);
     console.log(error);
   };
@@ -158,7 +172,11 @@ function DivisionsListing() {
   useEffect(() => {
     const fetchData = () => {
       setLoading(true);
-      httpHelper.getData('/api/divisions', successCallback, errorCallback);
+      httpHelper.getData(
+        '/api/divisions',
+        loadingSuccessCallback,
+        loadingErrorCallback
+      );
     };
 
     fetchData();
