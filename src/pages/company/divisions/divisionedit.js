@@ -119,7 +119,7 @@ function DivisionEdit() {
       open: true,
       type: 'success',
       value: 'record saveed',
-      redirect: '/divisions/',
+      redirect: `/divisions/view/${id}`,
       duration: 1500,
     });
   };
