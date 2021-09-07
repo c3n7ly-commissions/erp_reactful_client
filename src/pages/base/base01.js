@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   CssBaseline,
   Divider,
@@ -7,16 +7,16 @@ import {
   Snackbar,
   ThemeProvider,
   createTheme,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core";
-import NavigationDrawer from "../../components/drawer";
-import NavBar from "../../components/navbar";
-import NavBreadcrumbs from "../../components/navcrumbs";
+} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core';
+import NavigationDrawer from '../../components/drawer';
+import NavBar from '../../components/navbar';
+import NavBreadcrumbs from '../../components/navcrumbs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
   // needed for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   headerGrid: {
-    marginTop: "24px",
-    marginBottom: "24px",
+    marginTop: '24px',
+    marginBottom: '24px',
     flexGrow: 1,
   },
 }));
@@ -40,35 +40,35 @@ const useStyles = makeStyles((theme) => ({
 const theme = createTheme({
   typography: {
     fontFamily: [
-      "Open Sans",
-      "-apple-system",
-      "BlinkMacSystemFont",
+      'Open Sans',
+      '-apple-system',
+      'BlinkMacSystemFont',
       '"Segoe UI"',
-      "Roboto",
+      'Roboto',
       '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
+      'Arial',
+      'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(","),
+    ].join(','),
   },
 
   palette: {
     primary: {
-      main: "#376FD0",
+      main: '#376FD0',
     },
     secondary: {
-      main: "#D32F2F",
+      main: '#D32F2F',
     },
     warning: {
-      main: "#f00",
+      main: '#FFA219',
     },
     background: {
-      paper: "#fff",
+      paper: '#fff',
     },
     text: {
-      primary: "#000",
+      primary: '#000',
     },
   },
 });

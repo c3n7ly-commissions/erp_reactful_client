@@ -48,6 +48,14 @@ function DivisionEdit() {
     type: 'save_data', // page_load or save_data
   });
 
+  const [snackBarState, setSnackBarState] = useState({
+    open: false,
+    value: '',
+    type: 'success',
+    redirect: false,
+    duration: -1,
+  });
+
   const [formValues, setFormValues] = useState({
     divisionName: '',
   });
@@ -101,6 +109,72 @@ function DivisionEdit() {
     fetchData();
   }, [id]);
 
+  const savingSuccessCallback = (response) => {
+    console.log(response.data);
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
+    setSnackBarState({
+      open: true,
+      type: 'success',
+      value: 'record saveed',
+      redirect: '/divisions/',
+      duration: 1500,
+    });
+  };
+
+  const savingErrorCallback = (error) => {
+    console.log(error);
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      if (error.response.status === 401) {
+        // unauthenticated
+        setSnackBarState({
+          open: true,
+          type: 'error',
+          value: error.response.data.message,
+          redirect: '/',
+          duration: 1500,
+        });
+      } else if (error.response.status === 409) {
+        setSnackBarState({
+          open: true,
+          type: 'warning',
+          value: error.response.data.message,
+        });
+      } else if (error.response.status === 422) {
+        setSnackBarState({
+          open: true,
+          type: 'warning',
+          value: error.response.data.message,
+        });
+      } else {
+        setSnackBarState({
+          open: true,
+          type: 'error',
+          value: `error code ${error.response.status}`,
+        });
+      }
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+  };
+
   const saveClicked = () => {
     let { ...validations } = formValidations;
     validations['divisionName'] =
@@ -117,12 +191,46 @@ function DivisionEdit() {
       loading: true,
       type: 'save_data',
     });
+
+    setSnackBarState({
+      open: true,
+      value: 'Saving',
+      type: 'info',
+    });
+
+    console.log('submitting');
+    const formData = {
+      name: formValues['divisionName'],
+    };
+    httpHelper.putData(
+      `/api/divisions/${id}`,
+      formData,
+      savingSuccessCallback,
+      savingErrorCallback
+    );
   };
 
   return (
     <BasePage01
       crumb={['Company', 'Divisions', 'Edit', id]}
       title={`Edit Division ${id}`}
+      snackbar={{
+        closeHandler: () => {
+          setSnackBarState({
+            open: false,
+            value: '',
+            type: 'success',
+          });
+          if (snackBarState.redirect) {
+            history.replace(snackBarState.redirect);
+          }
+        },
+        autoHideDuration:
+          snackBarState.duration && snackBarState.duration > 0
+            ? snackBarState.duration
+            : 6000,
+        ...snackBarState,
+      }}
       actions={
         <Button
           variant="contained"
