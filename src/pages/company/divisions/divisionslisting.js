@@ -76,7 +76,6 @@ function DivisionsListing() {
       open: true,
       type: 'success',
       value: 'record deleted',
-      duration: 6000,
     });
   };
 
