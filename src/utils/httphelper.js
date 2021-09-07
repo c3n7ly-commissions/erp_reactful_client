@@ -66,6 +66,28 @@ class HttpHelper {
         });
     });
   }
+
+  deleteData(url, successCallback, errorCallback) {
+    axios.defaults.withCredentials = true;
+    const config = {
+      xsrfHeaderName: 'X-XSRF-TOKEN', // change the name of the header to "X-XSRF-TOKEN"
+      withCredentials: true,
+      headers: {
+        Authorization: 'Bearer ' + window.sessionStorage.getItem('token'),
+      },
+    };
+
+    axios.get('/sanctum/csrf-cookie').then((_response) => {
+      axios
+        .delete(url, config)
+        .then((response) => {
+          successCallback(response);
+        })
+        .catch((error) => {
+          errorCallback(error);
+        });
+    });
+  }
 }
 
 export default new HttpHelper();
