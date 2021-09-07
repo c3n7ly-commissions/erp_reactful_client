@@ -52,7 +52,19 @@ function DivisionEdit() {
     divisionName: '',
   });
 
-  const successCallback = (response) => {
+  const [formValidations, setFormValidations] = useState({
+    divisionName: '',
+  });
+
+  const fieldChangedClosure = (fieldName) => {
+    return (event) => {
+      let { ...tmpVals } = formValues;
+      tmpVals[fieldName] = event.target.value;
+      setFormValues({ ...tmpVals });
+    };
+  };
+
+  const loadingSuccessCallback = (response) => {
     console.log(response.data.data);
 
     setButtonState({
@@ -65,7 +77,7 @@ function DivisionEdit() {
     });
   };
 
-  const errorCallback = (error) => {
+  const loadingErrorCallback = (error) => {
     setButtonState({
       loading: false,
       type: 'save_data',
@@ -81,13 +93,31 @@ function DivisionEdit() {
       });
       httpHelper.getData(
         `/api/divisions/${id}`,
-        successCallback,
-        errorCallback
+        loadingSuccessCallback,
+        loadingErrorCallback
       );
     };
 
     fetchData();
   }, [id]);
+
+  const saveClicked = () => {
+    let { ...validations } = formValidations;
+    validations['divisionName'] =
+      formValues['divisionName'] === ''
+        ? 'This field should not be left empty'
+        : '';
+
+    setFormValidations(validations);
+    if (validations['divisionName'] !== '') {
+      return;
+    }
+
+    setButtonState({
+      loading: true,
+      type: 'save_data',
+    });
+  };
 
   return (
     <BasePage01
@@ -119,6 +149,9 @@ function DivisionEdit() {
                 variant="outlined"
                 className={classes.textField}
                 value={formValues['divisionName']}
+                error={formValidations['divisionName'] !== ''}
+                helperText={formValidations['divisionName']}
+                onChange={fieldChangedClosure('divisionName')}
               />
             </Grid>
 
@@ -131,6 +164,7 @@ function DivisionEdit() {
                       color="primary"
                       size="small"
                       disabled={buttonState.loading}
+                      onClick={saveClicked}
                       startIcon={
                         buttonState.type === 'page_load' ? (
                           <AccessTimeIcon />
