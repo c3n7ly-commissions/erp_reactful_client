@@ -48,12 +48,21 @@ function DivisionEdit() {
     type: 'save_data', // page_load or save_data
   });
 
+  const [formValues, setFormValues] = useState({
+    divisionName: '',
+  });
+
   const successCallback = (response) => {
+    console.log(response.data.data);
+
     setButtonState({
       loading: false,
       type: 'save_data',
     });
-    console.log(response.data.data);
+
+    setFormValues({
+      divisionName: response.data.data.name,
+    });
   };
 
   const errorCallback = (error) => {
@@ -109,6 +118,7 @@ function DivisionEdit() {
                 label="Division Name"
                 variant="outlined"
                 className={classes.textField}
+                value={formValues['divisionName']}
               />
             </Grid>
 
