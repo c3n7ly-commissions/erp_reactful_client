@@ -30,6 +30,10 @@ function DivisionsListing() {
 
   const [rows, setRows] = useState([]);
   const [menuAnchors, setMenuAnchors] = useState({});
+  const [modalState, setModalState] = useState({
+    open: false,
+    content: '',
+  });
   const [loading, setLoading] = useState(false);
   const [pageSize, setPageSize] = React.useState(10);
 
@@ -45,10 +49,24 @@ function DivisionsListing() {
 
   const deleteItemClosure = (id) => {
     return () => {
+      // first close the menu
       let { ...tmpMenuAnchors } = menuAnchors;
       tmpMenuAnchors[id] = null;
       setMenuAnchors(tmpMenuAnchors);
+
+      // then handle deleting the record
+      setModalState({
+        open: true,
+        content: `Division with the id ${id} will be deleted`,
+      });
     };
+  };
+
+  const closeModal = () => {
+    setModalState({
+      open: false,
+      content: '',
+    });
   };
 
   const cols = [
@@ -174,19 +192,18 @@ function DivisionsListing() {
         </CardContent>
       </Card>
       <ConfirmationModal
-        open={true}
-        title={`Delete record 1?`}
+        open={modalState.open}
+        title={`Delete record?`}
         yesButtonText="Delete"
         handleYesClicked={() => {
           console.log('deleting');
         }}
         handleNoClicked={() => {
           console.log('not deleting');
+          closeModal();
         }}
       >
-        Dolor modi autem perferendis dignissimos neque. Eos labore ratione
-        corrupti vitae omnis. At inventore ab tempora ab quisquam, consequuntur
-        vero Quibusdam facere eum perferendis animi possimus fuga? Odit nam et.
+        {modalState.content}
       </ConfirmationModal>
     </BasePage01>
   );
