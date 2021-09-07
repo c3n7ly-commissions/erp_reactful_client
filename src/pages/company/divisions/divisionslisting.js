@@ -58,6 +58,7 @@ function DivisionsListing() {
   const loadingErrorCallback = (error) => {
     setLoading(false);
     console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
   const fetchData = () => {

@@ -91,6 +91,7 @@ function DivisionEdit() {
       type: 'save_data',
     });
     console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
   useEffect(() => {

@@ -111,6 +111,7 @@ function DivisionView() {
 
   const loadingErrorCallback = (error) => {
     console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
   useEffect(() => {
