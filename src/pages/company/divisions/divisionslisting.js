@@ -53,7 +53,184 @@ function DivisionsListing() {
   const loadingSuccessCallback = (response) => {
     console.log(response.data.data);
     setLoading(false);
-    setRows([...response.data.data]);
+    // setRows([...response.data.data]);
+    setRows([
+      {
+        id: 1,
+        name: 'aliquidsa',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-07 06:44:42',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/1',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/1/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/1/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/1/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: 'ipsam',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-02 15:10:09',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/2',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/2/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/2/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/2/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: 'est',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-02 15:10:09',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/3',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/3/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/3/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/3/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: 'enim',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-02 15:10:09',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/4',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/4/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/4/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/4/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: 'sint',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-02 15:10:09',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/5',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/5/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/5/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/5/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 6,
+        name: 'quia',
+        created_at: '2021-09-02 15:10:09',
+        updated_at: '2021-09-02 15:10:09',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/6',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/6/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/6/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/6/division_suppliers',
+          },
+        ],
+      },
+      {
+        id: 30,
+        name: 'mras',
+        created_at: '2021-09-07 15:00:18',
+        updated_at: '2021-09-07 15:00:18',
+        deleted_at: '',
+        links: [
+          {
+            rel: 'self',
+            href: 'http://localhost:8100/api/divisions/30',
+          },
+          {
+            rel: 'divisions.branches',
+            href: 'http://localhost:8100/api/divisions/30/branches',
+          },
+          {
+            rel: 'divisions.products',
+            href: 'http://localhost:8100/api/divisions/30/products',
+          },
+          {
+            rel: 'divisions.division_suppliers',
+            href: 'http://localhost:8100/api/divisions/30/division_suppliers',
+          },
+        ],
+      },
+    ]);
   };
   const loadingErrorCallback = (error) => {
     setLoading(false);
@@ -129,13 +306,13 @@ function DivisionsListing() {
   const cols = [
     { field: 'id', headerName: 'ID', minWidth: 100 },
     { field: 'name', headerName: 'Name', flex: 1, minWidth: 200 },
-    { field: 'created_at', headerName: 'Created At', flex: 1, minWidth: 200 },
-    { field: 'updated_at', headerName: 'Updated At', flex: 1, minWidth: 200 },
+    { field: 'created_at', headerName: 'Created At', minWidth: 200 },
+    { field: 'updated_at', headerName: 'Updated At', minWidth: 200 },
     {
       field: 'action',
       headerName: 'Action',
       disableClickEventBubling: true,
-      width: 120,
+      minWidth: 120,
       renderCell: (params) => {
         const onClick = (event) => {
           console.log(params.row);
