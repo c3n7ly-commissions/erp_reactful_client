@@ -50,8 +50,34 @@ function DivisionsListing() {
     };
   };
 
+  const loadingSuccessCallback = (response) => {
+    console.log(response.data.data);
+    setLoading(false);
+    setRows([...response.data.data]);
+  };
+  const loadingErrorCallback = (error) => {
+    setLoading(false);
+    console.log(error);
+  };
+
+  const fetchData = () => {
+    setLoading(true);
+    httpHelper.getData(
+      '/api/divisions',
+      loadingSuccessCallback,
+      loadingErrorCallback
+    );
+  };
+
   const deletingSuccessCallback = (response) => {
     console.log(response);
+    fetchData();
+    setSnackBarState({
+      open: true,
+      type: 'success',
+      value: 'record deleted',
+      duration: 6000,
+    });
   };
 
   const deletingErrorCallback = (error) => {
@@ -64,7 +90,7 @@ function DivisionsListing() {
       console.log('Deleting', id);
       closeModal();
       httpHelper.deleteData(
-        '/api/divisions',
+        `/api/divisions/${id}`,
         deletingSuccessCallback,
         deletingErrorCallback
       );
@@ -167,18 +193,8 @@ function DivisionsListing() {
     },
   ];
 
-  const loadingSuccessCallback = (response) => {
-    console.log(response.data.data);
-    setLoading(false);
-    setRows([...response.data.data]);
-  };
-  const loadingErrorCallback = (error) => {
-    setLoading(false);
-    console.log(error);
-  };
-
   useEffect(() => {
-    const fetchData = () => {
+    const fetchDataOnMount = () => {
       setLoading(true);
       httpHelper.getData(
         '/api/divisions',
@@ -187,7 +203,7 @@ function DivisionsListing() {
       );
     };
 
-    fetchData();
+    fetchDataOnMount();
   }, []);
 
   return (
