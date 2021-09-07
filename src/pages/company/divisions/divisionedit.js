@@ -118,7 +118,7 @@ function DivisionEdit() {
     setSnackBarState({
       open: true,
       type: 'success',
-      value: 'record saveed',
+      value: 'record saved',
       redirect: `/divisions/view/${id}`,
       duration: 1500,
     });

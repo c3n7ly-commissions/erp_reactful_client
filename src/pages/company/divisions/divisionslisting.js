@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     marginBottom: theme.spacing(1.5),
   },
+  deleteMenuItem: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 function DivisionsListing() {
@@ -92,7 +95,10 @@ function DivisionsListing() {
               >
                 Edit
               </MenuItem>
-              <MenuItem onClick={handleMenuClose(params.row.id)}>
+              <MenuItem
+                onClick={handleMenuClose(params.row.id)}
+                className={classes.deleteMenuItem}
+              >
                 Delete
               </MenuItem>
             </Menu>
