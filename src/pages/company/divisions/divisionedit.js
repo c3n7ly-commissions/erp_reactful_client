@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Card,
@@ -15,6 +15,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SaveIcon from '@material-ui/icons/Save';
 import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const useStyles = makeStyles((theme) => ({
   cardHeader: {
@@ -42,16 +43,33 @@ function DivisionEdit() {
   const history = useHistory();
   const classes = useStyles();
 
+  const [buttonState, setButtonState] = useState({
+    loading: false,
+    type: 'save_data', // page_load or save_data
+  });
+
   const successCallback = (response) => {
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
     console.log(response.data.data);
   };
 
   const errorCallback = (error) => {
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
     console.log(error);
   };
 
   useEffect(() => {
     const fetchData = () => {
+      setButtonState({
+        loading: true,
+        type: 'page_load',
+      });
       httpHelper.getData(
         `/api/divisions/${id}`,
         successCallback,
@@ -97,14 +115,29 @@ function DivisionEdit() {
             <Grid item xs={12}>
               <Grid container spacing={0}>
                 <Grid item xs="auto">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    startIcon={<SaveIcon />}
-                  >
-                    Save
-                  </Button>
+                  <div className={classes.wrapper}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      disabled={buttonState.loading}
+                      startIcon={
+                        buttonState.type === 'page_load' ? (
+                          <AccessTimeIcon />
+                        ) : (
+                          <SaveIcon />
+                        )
+                      }
+                    >
+                      {buttonState.type === 'page_load' ? 'Loading' : 'Save'}
+                    </Button>
+                    {buttonState.loading && (
+                      <CircularProgress
+                        size={20}
+                        className={classes.circularProgress}
+                      />
+                    )}
+                  </div>
                 </Grid>
               </Grid>
             </Grid>
