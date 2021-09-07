@@ -1,14 +1,46 @@
 import React, { useEffect } from 'react';
-import { Typography, Card, CardContent, Button } from '@material-ui/core';
+import {
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  makeStyles,
+} from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import SaveIcon from '@material-ui/icons/Save';
 import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
+
+const useStyles = makeStyles((theme) => ({
+  cardHeader: {
+    fontWeight: 300,
+    marginBottom: theme.spacing(1.5),
+  },
+  textField: {
+    minWidth: '100%',
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  circularProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: '-10px',
+    marginLeft: '-10px',
+  },
+}));
 
 function DivisionEdit() {
   let { id } = useParams();
   const history = useHistory();
+  const classes = useStyles();
 
   const successCallback = (response) => {
     console.log(response.data.data);
@@ -50,22 +82,33 @@ function DivisionEdit() {
     >
       <Card>
         <CardContent>
-          <Typography paragraph>Content goes here</Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
+          <Typography variant="subtitle2" className={classes.cardHeader}>
+            Edit Division {id}
           </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="Division Name"
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Grid container spacing={0}>
+                <Grid item xs="auto">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    startIcon={<SaveIcon />}
+                  >
+                    Save
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </BasePage01>
