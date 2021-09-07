@@ -109,7 +109,7 @@ function DivisionsListing() {
       tmpMenuAnchors[id] = null;
       setMenuAnchors(tmpMenuAnchors);
 
-      // then handle deleting the record
+      // then show the confirmation dialog
       setModalState({
         open: true,
         content: `Division with the id ${id} will be deleted. Proceed?`,
@@ -258,6 +258,7 @@ function DivisionsListing() {
           </div>
         </CardContent>
       </Card>
+
       <ConfirmationModal
         open={modalState.open}
         title={`Delete record?`}

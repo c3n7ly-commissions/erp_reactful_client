@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom';
 
 import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
+import ConfirmationModal from '../../../components/modals/confirmationmodal';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -35,9 +36,66 @@ function DivisionView() {
   const history = useHistory();
   let { id } = useParams();
 
+  const [snackBarState, setSnackBarState] = useState({
+    open: false,
+    value: '',
+    type: 'success',
+    redirect: false,
+    duration: -1,
+  });
+
   const [rows, setRows] = useState([]);
 
-  const successCallback = (response) => {
+  const deletingSuccessCallback = (response) => {
+    console.log(response);
+    // TODO: redirect
+    setSnackBarState({
+      open: true,
+      type: 'success',
+      value: 'record deleted',
+    });
+  };
+
+  const deletingErrorCallback = (error) => {
+    console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
+  };
+
+  const deleteRecordClosure = (id) => {
+    return () => {
+      console.log('Deleting', id);
+      closeModal();
+      httpHelper.deleteData(
+        `/api/divisions/${id}`,
+        deletingSuccessCallback,
+        deletingErrorCallback
+      );
+    };
+  };
+
+  const [modalState, setModalState] = useState({
+    open: false,
+    content: '',
+    proceedHandler: deleteRecordClosure(-1),
+  });
+
+  const closeModal = () => {
+    setModalState({
+      open: false,
+      content: '',
+    });
+  };
+
+  const deleteButtonClicked = () => {
+    console.log('deleting');
+    setModalState({
+      open: true,
+      content: `Division with the id ${id} will be deleted. Proceed?`,
+      proceedHandler: deleteRecordClosure(id),
+    });
+  };
+
+  const loadingSuccessCallback = (response) => {
     console.log(response.data.data);
     let tmpRows = [];
     for (let key in response.data.data) {
@@ -49,7 +107,7 @@ function DivisionView() {
     setRows(tmpRows);
   };
 
-  const errorCallback = (error) => {
+  const loadingErrorCallback = (error) => {
     console.log(error);
   };
 
@@ -57,8 +115,8 @@ function DivisionView() {
     const fetchData = () => {
       httpHelper.getData(
         `/api/divisions/${id}`,
-        successCallback,
-        errorCallback
+        loadingSuccessCallback,
+        loadingErrorCallback
       );
     };
 
@@ -82,6 +140,23 @@ function DivisionView() {
           All Divisions
         </Button>
       }
+      snackbar={{
+        closeHandler: () => {
+          setSnackBarState({
+            open: false,
+            value: '',
+            type: 'success',
+          });
+          if (snackBarState.redirect) {
+            history.replace(snackBarState.redirect);
+          }
+        },
+        autoHideDuration:
+          snackBarState.duration && snackBarState.duration > 0
+            ? snackBarState.duration
+            : 6000,
+        ...snackBarState,
+      }}
     >
       <Card>
         <CardContent>
@@ -122,6 +197,7 @@ function DivisionView() {
                       <Grid item xs="auto">
                         <Button
                           startIcon={<DeleteOutlinedIcon />}
+                          onClick={deleteButtonClicked}
                           color="secondary"
                           variant="outlined"
                           size="small"
@@ -137,6 +213,15 @@ function DivisionView() {
           </TableContainer>
         </CardContent>
       </Card>
+
+      <ConfirmationModal
+        open={modalState.open}
+        title={`Delete record?`}
+        handleYesClicked={modalState.proceedHandler}
+        handleNoClicked={closeModal}
+      >
+        {modalState.content}
+      </ConfirmationModal>
     </BasePage01>
   );
 }
