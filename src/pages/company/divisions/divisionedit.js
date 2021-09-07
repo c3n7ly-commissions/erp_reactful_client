@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography, Card, CardContent, Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import BasePage01 from '../../base/base01';
+import httpHelper from '../../../utils/httphelper';
 
 function DivisionEdit() {
   let { id } = useParams();
   const history = useHistory();
+
+  const successCallback = (response) => {
+    console.log(response.data.data);
+  };
+
+  const errorCallback = (error) => {
+    console.log(error);
+  };
+
+  useEffect(() => {
+    const fetchData = () => {
+      httpHelper.getData(
+        `/api/divisions/${id}`,
+        successCallback,
+        errorCallback
+      );
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <BasePage01
       crumb={['Company', 'Divisions', 'Edit', id]}
