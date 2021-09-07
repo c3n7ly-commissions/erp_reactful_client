@@ -32,6 +32,13 @@ function DivisionsListing() {
   const [menuAnchors, setMenuAnchors] = useState({});
   const [loading, setLoading] = useState(false);
   const [pageSize, setPageSize] = React.useState(10);
+  const [snackBarState, setSnackBarState] = useState({
+    open: false,
+    value: '',
+    type: 'success',
+    redirect: false,
+    duration: -1,
+  });
 
   const history = useHistory();
 
@@ -49,12 +56,13 @@ function DivisionsListing() {
 
   const deletingErrorCallback = (error) => {
     console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
   const deleteRecordClosure = (id) => {
     return () => {
       console.log('Deleting', id);
-
+      closeModal();
       httpHelper.deleteData(
         '/api/divisions',
         deletingSuccessCallback,
@@ -199,6 +207,23 @@ function DivisionsListing() {
           Add Division
         </Button>
       }
+      snackbar={{
+        closeHandler: () => {
+          setSnackBarState({
+            open: false,
+            value: '',
+            type: 'success',
+          });
+          if (snackBarState.redirect) {
+            history.replace(snackBarState.redirect);
+          }
+        },
+        autoHideDuration:
+          snackBarState.duration && snackBarState.duration > 0
+            ? snackBarState.duration
+            : 6000,
+        ...snackBarState,
+      }}
     >
       <Card>
         <CardContent>
