@@ -12,6 +12,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import AddIcon from '@material-ui/icons/Add';
 import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
+import ConfirmationModal from '../../../components/modals/confirmationmodal';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,15 @@ function DivisionsListing() {
       setMenuAnchors(tmpMenuAnchors);
     };
   };
+
+  const deleteItemClosure = (id) => {
+    return () => {
+      let { ...tmpMenuAnchors } = menuAnchors;
+      tmpMenuAnchors[id] = null;
+      setMenuAnchors(tmpMenuAnchors);
+    };
+  };
+
   const cols = [
     { field: 'id', headerName: 'ID', minWidth: 100 },
     { field: 'name', headerName: 'Name', flex: 1, minWidth: 200 },
@@ -96,7 +106,7 @@ function DivisionsListing() {
                 Edit
               </MenuItem>
               <MenuItem
-                onClick={handleMenuClose(params.row.id)}
+                onClick={deleteItemClosure(params.row.id)}
                 className={classes.deleteMenuItem}
               >
                 Delete
@@ -163,6 +173,21 @@ function DivisionsListing() {
           </div>
         </CardContent>
       </Card>
+      <ConfirmationModal
+        open={true}
+        title={`Delete record 1?`}
+        yesButtonText="Delete"
+        handleYesClicked={() => {
+          console.log('deleting');
+        }}
+        handleNoClicked={() => {
+          console.log('not deleting');
+        }}
+      >
+        Dolor modi autem perferendis dignissimos neque. Eos labore ratione
+        corrupti vitae omnis. At inventore ab tempora ab quisquam, consequuntur
+        vero Quibusdam facere eum perferendis animi possimus fuga? Odit nam et.
+      </ConfirmationModal>
     </BasePage01>
   );
 }
