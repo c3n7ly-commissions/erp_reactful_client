@@ -57,7 +57,7 @@ function DivisionsListing() {
       // then handle deleting the record
       setModalState({
         open: true,
-        content: `Division with the id ${id} will be deleted`,
+        content: `Division with the id ${id} will be deleted. Proceed?`,
       });
     };
   };
@@ -194,14 +194,10 @@ function DivisionsListing() {
       <ConfirmationModal
         open={modalState.open}
         title={`Delete record?`}
-        yesButtonText="Delete"
         handleYesClicked={() => {
           console.log('deleting');
         }}
-        handleNoClicked={() => {
-          console.log('not deleting');
-          closeModal();
-        }}
+        handleNoClicked={closeModal}
       >
         {modalState.content}
       </ConfirmationModal>
