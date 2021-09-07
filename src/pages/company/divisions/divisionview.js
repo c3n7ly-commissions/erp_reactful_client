@@ -53,6 +53,8 @@ function DivisionView() {
       open: true,
       type: 'success',
       value: 'record deleted',
+      redirect: '/divisions',
+      duration: 1500,
     });
   };
 
