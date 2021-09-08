@@ -82,12 +82,12 @@ function BranchesListing() {
     httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
-  const deleteRecordClosure = (id) => {
+  const deleteRecordClosure = (id, division_id) => {
     return () => {
       console.log('Deleting', id);
       closeModal();
       httpHelper.deleteData(
-        `/api/branches/${id}`,
+        `/api/divisions/${division_id}/branches/${id}`,
         deletingSuccessCallback,
         deletingErrorCallback
       );
@@ -97,10 +97,10 @@ function BranchesListing() {
   const [modalState, setModalState] = useState({
     open: false,
     content: '',
-    proceedHandler: deleteRecordClosure(-1),
+    proceedHandler: deleteRecordClosure(-1, -1),
   });
 
-  const deleteItemModalClosure = (id) => {
+  const deleteItemModalClosure = (id, division_id) => {
     return () => {
       // first close the menu
       let { ...tmpMenuAnchors } = menuAnchors;
@@ -111,7 +111,7 @@ function BranchesListing() {
       setModalState({
         open: true,
         content: `Branch with the id ${id} will be deleted. Proceed?`,
-        proceedHandler: deleteRecordClosure(id),
+        proceedHandler: deleteRecordClosure(id, division_id),
       });
     };
   };
@@ -184,7 +184,10 @@ function BranchesListing() {
                 Edit
               </MenuItem>
               <MenuItem
-                onClick={deleteItemModalClosure(params.row.id)}
+                onClick={deleteItemModalClosure(
+                  params.row.id,
+                  params.row.division_id
+                )}
                 className={classes.deleteMenuItem}
               >
                 Delete
