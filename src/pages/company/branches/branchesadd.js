@@ -40,10 +40,18 @@ function BranchesAdd() {
   const history = useHistory();
   const [formValues, setFormValues] = useState({
     branchName: '',
+    email: '',
+    telephone: '',
+    postalAddress: '',
+    physicalAddress: '',
   });
 
   const [formValidations, setFormValidations] = useState({
     branchName: '',
+    email: '',
+    telephone: '',
+    postalAddress: '',
+    physicalAddress: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -167,6 +175,58 @@ function BranchesAdd() {
                 error={formValidations['branchName'] !== ''}
                 helperText={formValidations['branchName']}
                 onChange={fieldChangedClosure('branchName')}
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                label="Email"
+                value={formValues['email']}
+                error={formValidations['email'] !== ''}
+                helperText={formValidations['email']}
+                onChange={fieldChangedClosure('email')}
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                label="Telephone"
+                value={formValues['telephone']}
+                error={formValidations['telephone'] !== ''}
+                helperText={formValidations['telephone']}
+                onChange={fieldChangedClosure('telephone')}
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                label="Postal Address"
+                value={formValues['postalAddress']}
+                error={formValidations['postalAddress'] !== ''}
+                helperText={formValidations['postalAddress']}
+                onChange={fieldChangedClosure('postalAddress')}
+                variant="outlined"
+                className={classes.textField}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                required
+                label="Physical Address"
+                value={formValues['physicalAddress']}
+                error={formValidations['physicalAddress'] !== ''}
+                helperText={formValidations['physicalAddress']}
+                onChange={fieldChangedClosure('physicalAddress')}
                 variant="outlined"
                 className={classes.textField}
               />
