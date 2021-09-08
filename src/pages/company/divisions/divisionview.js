@@ -48,7 +48,6 @@ function DivisionView() {
 
   const deletingSuccessCallback = (response) => {
     console.log(response);
-    // TODO: redirect
     setSnackBarState({
       open: true,
       type: 'success',
