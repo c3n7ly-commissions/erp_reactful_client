@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Card,
@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { useHistory } from 'react-router-dom';
+
 import BasePage01 from '../../base/base01';
 import httpHelper from '../../../utils/httphelper';
 
@@ -69,6 +70,29 @@ function BranchesAdd() {
     redirect: false,
     duration: -1,
   });
+
+  const [divisions, setDivisions] = useState([]);
+  const loadingDivisionsSuccess = (response) => {
+    console.log(response.data.data);
+    setDivisions([...response.data.data]);
+  };
+
+  const loadingDivisionsError = (error) => {
+    console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
+  };
+
+  useEffect(() => {
+    const fetchData = () => {
+      httpHelper.getData(
+        `api/divisions`,
+        loadingDivisionsSuccess,
+        loadingDivisionsError
+      );
+    };
+
+    fetchData();
+  }, []);
 
   const fieldChangedClosure = (fieldName) => {
     return (event) => {
@@ -204,8 +228,11 @@ function BranchesAdd() {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={12}>Hardware</MenuItem>
-                  <MenuItem value={8}>Retail</MenuItem>
+                  {divisions.map((division) => (
+                    <MenuItem key={division.id} value={division.id}>
+                      {division.name}
+                    </MenuItem>
+                  ))}
                 </Select>
                 <FormHelperText>{formValidations['divisionId']}</FormHelperText>
               </FormControl>
