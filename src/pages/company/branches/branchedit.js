@@ -54,6 +54,7 @@ function BranchEdit() {
     type: 'save_data', // page_load or save_data
   });
 
+  const [divisionId, setDivisionId] = useState(-1);
   const [formValues, setFormValues] = useState({
     branchName: '',
     divisionId: '',
@@ -96,6 +97,7 @@ function BranchEdit() {
       postalAddress: data.postal_address,
       physicalAddress: data.physical_address,
     });
+    setDivisionId(data.division_id);
   };
   const loadingDataError = (error) => {
     setButtonState({
@@ -214,14 +216,15 @@ function BranchEdit() {
     });
 
     console.log('submitting');
-    const formData = new FormData();
-    formData.append('name', formValues['branchName']);
-    formData.append('email', formValues['email']);
-    formData.append('telephone', formValues['telephone']);
-    formData.append('postal_address', formValues['postalAddress']);
-    formData.append('physical_address', formValues['physicalAddress']);
-    httpHelper.postData(
-      `/api/divisions/${formValues['divisionId']}/branches`,
+    const formData = {
+      name: formValues['branchName'],
+      email: formValues['email'],
+      telephone: formValues['telephone'],
+      postal_address: formValues['postalAddress'],
+      physical_address: formValues['physicalAddress'],
+    };
+    httpHelper.putData(
+      `/api/divisions/${divisionId}/branches/${id}`,
       formData,
       savingSuccessCallback,
       savingErrorCallback
