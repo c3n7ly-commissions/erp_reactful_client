@@ -14,6 +14,7 @@ import {
   CircularProgress,
   makeStyles,
 } from '@material-ui/core';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SaveIcon from '@material-ui/icons/Save';
 import { useParams } from 'react-router-dom';
@@ -47,6 +48,12 @@ function BranchEdit() {
   let { id } = useParams();
   const classes = useStyles();
   const history = useHistory();
+
+  const [buttonState, setButtonState] = useState({
+    loading: false,
+    type: 'save_data', // page_load or save_data
+  });
+
   const [formValues, setFormValues] = useState({
     branchName: '',
     divisionId: '',
@@ -65,7 +72,6 @@ function BranchEdit() {
     physicalAddress: '',
   });
 
-  const [loading, setLoading] = useState(false);
   const [snackBarState, setSnackBarState] = useState({
     open: false,
     value: '',
@@ -74,11 +80,33 @@ function BranchEdit() {
     duration: -1,
   });
 
-  const [divisions, setDivisions] = useState([]);
-  const loadingDivisionsSuccess = (response) => {
-    console.log(response.data.data);
-    setDivisions([...response.data.data]);
+  const loadingDataSuccess = (response) => {
+    console.log(response);
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
+
+    const data = response.data.data;
+    setFormValues({
+      branchName: data.name,
+      divisionId: data.division_id,
+      email: data.email,
+      telephone: data.telephone,
+      postalAddress: data.postal_address,
+      physicalAddress: data.physical_address,
+    });
   };
+  const loadingDataError = (error) => {
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
+    console.log(error);
+    httpHelper.handleCommonErrors(error, setSnackBarState);
+  };
+
+  const [divisions, setDivisions] = useState([]);
 
   const loadingDivisionsError = (error) => {
     console.log(error);
@@ -86,7 +114,25 @@ function BranchEdit() {
   };
 
   useEffect(() => {
+    const loadingDivisionsSuccess = (response) => {
+      // 1. update the select element
+      console.log(response.data.data);
+      setDivisions([...response.data.data]);
+
+      // 2. now fetch the page data
+      httpHelper.getData(
+        `/api/branches/${id}`,
+        loadingDataSuccess,
+        loadingDataError
+      );
+    };
+
     const fetchData = () => {
+      setButtonState({
+        loading: true,
+        type: 'page_load',
+      });
+
       httpHelper.getData(
         `api/divisions`,
         loadingDivisionsSuccess,
@@ -95,7 +141,7 @@ function BranchEdit() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const fieldChangedClosure = (fieldName) => {
     return (event) => {
@@ -107,7 +153,11 @@ function BranchEdit() {
 
   const savingSuccessCallback = (response) => {
     console.log(response);
-    setLoading(false);
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
+
     setSnackBarState({
       open: true,
       type: 'success',
@@ -119,7 +169,10 @@ function BranchEdit() {
 
   const savingErrorCallback = (error) => {
     console.log(error);
-    setLoading(false);
+    setButtonState({
+      loading: false,
+      type: 'save_data',
+    });
     httpHelper.handleCommonErrors(error, setSnackBarState);
   };
 
@@ -149,7 +202,11 @@ function BranchEdit() {
       }
     }
 
-    setLoading(true);
+    setButtonState({
+      loading: true,
+      type: 'save_data',
+    });
+
     setSnackBarState({
       open: true,
       value: 'Saving',
@@ -315,12 +372,18 @@ function BranchEdit() {
                       color="primary"
                       size="small"
                       onClick={saveClicked}
-                      disabled={loading}
-                      startIcon={<SaveIcon />}
+                      disabled={buttonState.loading}
+                      startIcon={
+                        buttonState.type === 'page_load' ? (
+                          <AccessTimeIcon />
+                        ) : (
+                          <SaveIcon />
+                        )
+                      }
                     >
-                      Save
+                      {buttonState.type === 'page_load' ? 'Loading' : 'Save'}
                     </Button>
-                    {loading && (
+                    {buttonState.loading && (
                       <CircularProgress
                         size={20}
                         className={classes.circularProgress}
