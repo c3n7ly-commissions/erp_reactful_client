@@ -45,6 +45,7 @@ function BranchView() {
   });
 
   const [rows, setRows] = useState([]);
+  const [divisionId, setDivisionId] = useState(-1);
 
   const deletingSuccessCallback = (response) => {
     console.log(response);
@@ -67,12 +68,12 @@ function BranchView() {
     });
   };
 
-  const deleteRecordClosure = (id) => {
+  const deleteRecordClosure = (id, divisionId) => {
     return () => {
       console.log('Deleting', id);
       closeModal();
       httpHelper.deleteData(
-        `api/branches/${id}`,
+        `/api/divisions/${divisionId}/branches/${id}`,
         deletingSuccessCallback,
         deletingErrorCallback
       );
@@ -82,7 +83,7 @@ function BranchView() {
   const [modalState, setModalState] = useState({
     open: false,
     content: '',
-    proceedHandler: deleteRecordClosure(-1),
+    proceedHandler: deleteRecordClosure(-1, -1),
   });
 
   const closeModal = () => {
@@ -97,7 +98,7 @@ function BranchView() {
     setModalState({
       open: true,
       content: `Branch with the id ${id} will be deleted. Proceed?`,
-      proceedHandler: deleteRecordClosure(id),
+      proceedHandler: deleteRecordClosure(id, divisionId),
     });
   };
 
@@ -111,6 +112,7 @@ function BranchView() {
       }
     }
     setRows(tmpRows);
+    setDivisionId(response.data.data.division_id);
   };
 
   const loadingErrorCallback = (error) => {
