@@ -154,7 +154,7 @@ function NavigationDrawer(props) {
             />
             <ListItemLink
               itemText="Branches"
-              clickHandler={handleNavLinkClick('/blank01')}
+              clickHandler={handleNavLinkClick('/branches')}
             />
           </List>
         </Collapse>

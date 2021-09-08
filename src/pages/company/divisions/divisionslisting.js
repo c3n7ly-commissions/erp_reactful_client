@@ -31,7 +31,7 @@ function DivisionsListing() {
   const [rows, setRows] = useState([]);
   const [menuAnchors, setMenuAnchors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [pageSize, setPageSize] = React.useState(10);
+  const [pageSize, setPageSize] = useState(10);
   const [snackBarState, setSnackBarState] = useState({
     open: false,
     value: '',
@@ -103,7 +103,7 @@ function DivisionsListing() {
     proceedHandler: deleteRecordClosure(-1),
   });
 
-  const deleteItemClosure = (id) => {
+  const deleteItemModalClosure = (id) => {
     return () => {
       // first close the menu
       let { ...tmpMenuAnchors } = menuAnchors;
@@ -181,7 +181,7 @@ function DivisionsListing() {
                 Edit
               </MenuItem>
               <MenuItem
-                onClick={deleteItemClosure(params.row.id)}
+                onClick={deleteItemModalClosure(params.row.id)}
                 className={classes.deleteMenuItem}
               >
                 Delete

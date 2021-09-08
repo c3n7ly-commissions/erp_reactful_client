@@ -9,6 +9,7 @@ import DivisionsListing from './pages/company/divisions/divisionslisting';
 import DivisionsAdd from './pages/company/divisions/divisionsadd';
 import DivisionView from './pages/company/divisions/divisionview';
 import DivisionEdit from './pages/company/divisions/divisionedit';
+import BranchesListing from './pages/company/branches/brancheslisting';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           path="/divisions/edit/:id"
           component={DivisionEdit}
         />
+        <ProtectedRoute exact path="/branches" component={BranchesListing} />
       </Switch>
     </Router>
   );
