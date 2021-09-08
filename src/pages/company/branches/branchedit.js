@@ -14,7 +14,9 @@ import {
   CircularProgress,
   makeStyles,
 } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SaveIcon from '@material-ui/icons/Save';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 import BasePage01 from '../../base/base01';
@@ -42,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BranchEdit() {
+  let { id } = useParams();
   const classes = useStyles();
   const history = useHistory();
   const [formValues, setFormValues] = useState({
@@ -170,8 +173,8 @@ function BranchEdit() {
 
   return (
     <BasePage01
-      crumb={['Company', 'Branches', 'Edit', 'x']}
-      title="Edit Branch x"
+      crumb={['Company', 'Branches', 'Edit', id]}
+      title={`Edit Branch ${id}`}
       snackbar={{
         closeHandler: () => {
           setSnackBarState({
@@ -189,11 +192,24 @@ function BranchEdit() {
             : 6000,
         ...snackBarState,
       }}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<ChevronLeftIcon />}
+          onClick={() => {
+            history.push('/branches');
+          }}
+        >
+          All Branches
+        </Button>
+      }
     >
       <Card>
         <CardContent>
           <Typography variant="subtitle2" className={classes.cardHeader}>
-            Add Branch
+            {`Edit Branch ${id}`}
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
