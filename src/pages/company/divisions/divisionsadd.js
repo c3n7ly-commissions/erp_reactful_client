@@ -71,7 +71,7 @@ function DivisionsAdd() {
       open: true,
       type: 'success',
       value: 'record saved',
-      redirect: '/divisions',
+      redirect: `/divisions/view/${response.data.data.id}`,
       duration: 1500,
     });
   }
