@@ -24,10 +24,15 @@ import ConfirmationModal from '../../../components/modals/confirmationmodal';
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: '100%',
+    maxWidth: '100vw',
   },
   actionCell: {
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
+  },
+  tableCell: {
+    whiteSpace: 'normal',
+    wordBreak: 'break-word',
   },
 }));
 
@@ -177,7 +182,9 @@ function BranchView() {
                     <TableCell component="th" scope="row">
                       <strong>{row.name}</strong>
                     </TableCell>
-                    <TableCell>{row.value === '' ? '-' : row.value}</TableCell>
+                    <TableCell className={classes.tableCell}>
+                      {row.value === '' ? '-' : row.value}
+                    </TableCell>
                   </TableRow>
                 ))}
                 <TableRow>
