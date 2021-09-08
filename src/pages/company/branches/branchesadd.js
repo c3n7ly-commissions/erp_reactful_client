@@ -5,6 +5,10 @@ import {
   CardContent,
   Grid,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   Button,
   CircularProgress,
   makeStyles,
@@ -40,6 +44,7 @@ function BranchesAdd() {
   const history = useHistory();
   const [formValues, setFormValues] = useState({
     branchName: '',
+    divisionId: '',
     email: '',
     telephone: '',
     postalAddress: '',
@@ -48,6 +53,7 @@ function BranchesAdd() {
 
   const [formValidations, setFormValidations] = useState({
     branchName: '',
+    divisionId: '',
     email: '',
     telephone: '',
     postalAddress: '',
@@ -167,7 +173,7 @@ function BranchesAdd() {
             Add Branch
           </Typography>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 label="Branch Name"
@@ -178,6 +184,25 @@ function BranchesAdd() {
                 variant="outlined"
                 className={classes.textField}
               />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <FormControl variant="outlined" className={classes.textField}>
+                <InputLabel id="division-label">Division*</InputLabel>
+                <Select
+                  labelId="division-label"
+                  labelWidth={70}
+                  id="division-control"
+                  value={formValues['divisionId']}
+                  onChange={fieldChangedClosure('divisionId')}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={12}>Hardware</MenuItem>
+                  <MenuItem value={8}>Retail</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
 
             <Grid item xs={12} md={6}>
