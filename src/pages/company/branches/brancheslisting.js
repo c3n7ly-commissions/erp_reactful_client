@@ -87,7 +87,7 @@ function BranchesListing() {
       console.log('Deleting', id);
       closeModal();
       httpHelper.deleteData(
-        `/api/divisions/${id}`,
+        `/api/branches/${id}`,
         deletingSuccessCallback,
         deletingErrorCallback
       );
@@ -223,7 +223,7 @@ function BranchesListing() {
             history.push('/branches/add');
           }}
         >
-          Add Division
+          Add Branch
         </Button>
       }
       snackbar={{
