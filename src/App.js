@@ -10,6 +10,7 @@ import DivisionsAdd from './pages/company/divisions/divisionsadd';
 import DivisionView from './pages/company/divisions/divisionview';
 import DivisionEdit from './pages/company/divisions/divisionedit';
 import BranchesListing from './pages/company/branches/brancheslisting';
+import BranchView from './pages/company/branches/branchview';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           component={DashboardScreen1}
         />
         <ProtectedRoute exact path="/blank01" component={BlankScreen01} />
+
         <ProtectedRoute exact path="/divisions" component={DivisionsListing} />
         <ProtectedRoute exact path="/divisions/add" component={DivisionsAdd} />
         <ProtectedRoute
@@ -36,7 +38,13 @@ function App() {
           path="/divisions/edit/:id"
           component={DivisionEdit}
         />
+
         <ProtectedRoute exact path="/branches" component={BranchesListing} />
+        <ProtectedRoute
+          exact
+          path="/branches/view/:id"
+          component={BranchView}
+        />
       </Switch>
     </Router>
   );
