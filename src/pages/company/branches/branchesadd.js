@@ -109,7 +109,7 @@ function BranchesAdd() {
       open: true,
       type: 'success',
       value: 'record saved',
-      redirect: '/branches',
+      redirect: `/branches/view/${response.data.data.id}`,
       duration: 1500,
     });
   };
@@ -128,8 +128,6 @@ function BranchesAdd() {
     const dontLeaveEmpty = 'This field should not be left empty';
     validations['branchName'] =
       formValues['branchName'] === '' ? dontLeaveEmpty : '';
-    validations['divisionName'] =
-      formValues['divisionName'] === '' ? dontLeaveEmpty : '';
     validations['divisionId'] =
       formValues['divisionId'] === '' ? dontLeaveEmpty : '';
     validations['email'] = formValues['email'] === '' ? dontLeaveEmpty : '';
@@ -163,7 +161,7 @@ function BranchesAdd() {
     formData.append('postal_address', formValues['postalAddress']);
     formData.append('physical_address', formValues['physicalAddress']);
     httpHelper.postData(
-      `/api/divisions/${formValues['divisionId']}/`,
+      `/api/divisions/${formValues['divisionId']}/branches`,
       formData,
       savingSuccessCallback,
       savingErrorCallback
@@ -242,6 +240,7 @@ function BranchesAdd() {
               <TextField
                 required
                 label="Email"
+                type="email"
                 value={formValues['email']}
                 error={formValidations['email'] !== ''}
                 helperText={formValidations['email']}
@@ -255,6 +254,7 @@ function BranchesAdd() {
               <TextField
                 required
                 label="Telephone"
+                type="tel"
                 value={formValues['telephone']}
                 error={formValidations['telephone'] !== ''}
                 helperText={formValidations['telephone']}
