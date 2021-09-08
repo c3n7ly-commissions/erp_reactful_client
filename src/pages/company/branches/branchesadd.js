@@ -6,6 +6,7 @@ import {
   Grid,
   TextField,
   FormControl,
+  FormHelperText,
   InputLabel,
   Select,
   MenuItem,
@@ -77,7 +78,7 @@ function BranchesAdd() {
     };
   };
 
-  const successCallback = (response) => {
+  const savingSuccessCallback = (response) => {
     console.log(response);
     setLoading(false);
     setSnackBarState({
@@ -89,7 +90,7 @@ function BranchesAdd() {
     });
   };
 
-  const errorCallback = (error) => {
+  const savingErrorCallback = (error) => {
     console.log(error);
     setLoading(false);
     httpHelper.handleCommonErrors(error, setSnackBarState);
@@ -140,8 +141,8 @@ function BranchesAdd() {
     httpHelper.postData(
       `/api/divisions/${formValues['divisionId']}/`,
       formData,
-      successCallback,
-      errorCallback
+      savingSuccessCallback,
+      savingErrorCallback
     );
   };
 
@@ -187,7 +188,11 @@ function BranchesAdd() {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <FormControl variant="outlined" className={classes.textField}>
+              <FormControl
+                variant="outlined"
+                className={classes.textField}
+                error={formValidations['divisionId'] !== ''}
+              >
                 <InputLabel id="division-label">Division*</InputLabel>
                 <Select
                   labelId="division-label"
@@ -202,6 +207,7 @@ function BranchesAdd() {
                   <MenuItem value={12}>Hardware</MenuItem>
                   <MenuItem value={8}>Retail</MenuItem>
                 </Select>
+                <FormHelperText>{formValidations['divisionId']}</FormHelperText>
               </FormControl>
             </Grid>
 
