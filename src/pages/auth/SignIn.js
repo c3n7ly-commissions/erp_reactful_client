@@ -41,8 +41,8 @@ const useStyles = makeStyles((_theme) => ({
   },
   header: {
     textAlign: 'center',
-    fontSize: '2.7rem',
-    fontWeight: 200,
+    fontSize: '1.9rem',
+    fontWeight: 500,
   },
   headerHelper: {
     textAlign: 'center',
