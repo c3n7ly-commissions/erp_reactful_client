@@ -194,7 +194,7 @@ function SignInScreen() {
         justifyContent="center"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={3}>
+        <Grid item xs={12} md={5} lg={3}>
           <Card>
             <CardContent>
               <Grid container spacing={2}>
